@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Giocatore</title>
+	</head>
+	<body>
+		<h1 th:text="${giocatore.nome} +' '+ ${giocatore.cognome}">Nome giocaotre</h1>
+		<div>
+			<div>
+				CF: <span th:text="${giocatore.codiceFiscale}" style="text-transform: uppercase;"></span>
+			</div>
+			<div>
+				Anno: <span th:text="${giocatore.dataNascita}"></span>
+			</div>
+			<div>
+				Ruolo:<span th:text="${giocatore.ruolo}"></span>
+			</div>
+			<div>
+				Altezza: <span th:text="${giocatore.altezza}"></span>
+			</div>	
+			
+		</div>
+
+
+	</body>
+	
+</html>

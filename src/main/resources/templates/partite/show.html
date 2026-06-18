@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Partita</title>
+	</head>
+	<body>
+		<h1>
+			<span th:text="${partita.squadraHome.nome}">Home</span>
+			<span th:if="${partita.stato.name() == 'SCHEDULED'}">-</span>
+			<span th:if="${partita.stato.name() == 'PLAYED'}" th:text="${partita.goalsHome + ' - ' + partita.goalsAway}"></span>
+			<span th:text="${partita.squadraAway.nome}">Away</span>			
+		</h1>
+		<div>
+			Data e ora:<span th:text="${#temporals.format(partita.dataOra, 'dd/MM/yyyy HH:mm')}"></span>
+		</div>	
+		<div>
+			Luogo: <span th:text="${partita.luogo}"></span>	
+		</div>
+		<div>
+			Arbitro (COD):<a th:href="@{'/arbitri/' + ${arbitro.id}}" th:text="${arbitro.codiceArbitro}"></a>
+		</div>
+		
+		<div>
+			<a th:href="@{'/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
+		</div>
+		<h2>Commenti
+			(<span th:text="${nCommenti}"></span>)
+		</h2>
+		<table th:each="c : ${partita.commenti}" border="1">
+					<thead>
+						<tr>
+							<th th:text="${c.titolo}">Titolo del commento</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="${c.descrizione}">Descrizione del commento</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+		<div>
+			<a th:href="@{'/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
+		</div>
+
+	</body>
+	
+</html>

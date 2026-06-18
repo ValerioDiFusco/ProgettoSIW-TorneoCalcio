@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lista</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/listaGiocatori.css}">
+	
+</head>
+
+<body>
+	<div class="nav">
+	    <div><strong>⚽ Tornei Calcio</strong></div>
+	    <div>
+	        <a href="/tornei">Tornei</a>
+	        <a href="/giocatori">Giocatori</a>
+	        <a href="/squadre">Squadre</a>
+	    </div>
+	</div>
+	
+	<div class="header">	
+		<h2>Cerca Giocatore</h2>
+	<form th:method="GET" th:action="@{/giocatori}">
+		<input type="text" name="nome" placeholder="Nome Giocatore">
+		<input type="text" name="cognome" placeholder="cognome Giocatore">
+		<button type="submit">Conferma</button>
+	</form>
+	</div>
+	
+	<div>
+	<ul class="table">
+		<li th:each="g : ${giocatori}">
+			<a th:href="'/giocatori/' + ${g.id}" th:text="${g.cognome + ' '+ g.nome}"></a>
+			<a th:href="@{'/giocatori/'+ ${g.id} + '/edit'}">Modifica</a>
+			<span th:text="${g.squadra.nome}"></span>
+		</li>
+	</ul>
+	</div>	
+	
+<footer>
+	Progetto SIW - Sistema gestione tornei calcio
+</footer>
+	
+</body>
+	
+</html>

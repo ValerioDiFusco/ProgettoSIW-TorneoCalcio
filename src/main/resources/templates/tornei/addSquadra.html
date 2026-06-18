@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AddSquadra</title>
+	</head>
+	
+	<body>
+		<h1>Aggiungi squadra al Torneo</h1>
+		<form th:method="POST" th:action="@{/tornei/{id}/squadre(id=${torneo.id})}">
+			<div th:each="s : ${squadre}">
+				<input type="checkbox" name="squadreId" th:value="${s.id}">
+				<span th:text="${s.nome}">Nome Squadra</span>
+			</div>
+			<div>
+				<button type="submit">Conferma</button>
+			</div>
+			
+		</form>
+	</body>
+	
+</html>

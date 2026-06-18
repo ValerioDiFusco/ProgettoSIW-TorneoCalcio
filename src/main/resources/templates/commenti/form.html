@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Commenti</title>
+	</head>
+	<body>
+		<form th:action="@{'/partite/{id}/commenti'(id=${commento.partita.id})}" th:method="POST" th:object="${commento}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+			</div>
+			<div>
+				Titolo:<span><input type="text" th:field="${commento.titolo}"></input></span>
+			</div>
+			<div>
+				Descrizione:<span><input type="text" th:field="${commento.descrizione}"></input></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form>
+	</body>
+</html>

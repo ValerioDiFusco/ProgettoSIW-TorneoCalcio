@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lista</title>
+	</head>
+	
+	<body>
+		<form th:method="GET" th:action="@{/tornei}">
+			<input type="text" name="nome" placeholder="Cerca torneo">
+			<button type="submit">Conferma</button>
+		</form>
+		<ul>
+			<li th:each="torneo : ${listaTornei}">
+				<a th:href="@{'/tornei/'+${torneo.id}}"
+				th:text="${torneo.nome}">Nome Torneo</a>
+			</li>
+		</ul>
+		<div>
+			<a th:href="@{'/tornei/new'}">Aggiungi Torneo</a>
+		</div>
+		
+	</body>
+	
+</html>

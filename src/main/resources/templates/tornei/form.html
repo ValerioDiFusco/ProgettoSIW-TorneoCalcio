@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Torneo</title>
+	</head>
+	
+	<body>
+		<h1 th:text="${torneo.id != null} ? 'Modifica Torneo' : 'Aggiungi Torneo'">Aggiungi Torneo</h1>
+		<form th:method="POST" 
+		          th:action="${torneo.id != null} ? @{/tornei/{id}(id=${torneo.id})} : @{/tornei}" 
+		          th:object="${torneo}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+			</div>
+			<div>
+				Nome: <span><input type="text" th:field="${torneo.nome}"></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>
+			<div>
+				Anno:<span><input type="text" th:field="${torneo.anno}"></span>
+				<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
+			</div>
+			<div>
+				Descrizione:<span><input type="text" th:field="${torneo.descrizione}"></span>
+				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</span>
+			</div>
+		</form>
+
+	</body>
+	
+</html>

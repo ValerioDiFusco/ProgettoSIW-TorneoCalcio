@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Torneo</title>
+	</head>
+	
+	<body>
+		<h1 th:text="${torneo.nome}">Nome Torneo</h1>
+		<div>
+			<div>
+				Anno: <span th:text="${torneo.anno}"></span>
+			</div>
+			<div>
+				<span>Squadre Partecipanti:</span>
+				<span th:if="${numSquadre != 0}">
+				<a th:href="@{'/tornei/' + ${torneo.id} + '/squadre'}" th:text="${numSquadre}"></a>
+				</span>
+				<span th:unless="${numSquadre != 0}">
+					<span th:text="${numSquadre}"></span>
+				</span>
+			</div>
+			<div>
+				Descrizione:
+				<div th:text="${torneo.descrizione}"></div>
+			</div>
+			<div>
+				<a th:href="@{'/tornei/' + ${torneo.id} + '/squadre/add'}">Iscrivi Squadra</a>
+			</div>
+			<div>
+				<a th:href="@{'/tornei/{id}/partite/new'(id=${torneo.id})}"> Aggiungi partita</a>
+			</div>
+			<div>
+			    Partite Programmate:
+				<ul>
+				    <li th:each="p : ${partiteProg}">
+						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+						<a th:href="@{'/partite/' + ${p.id}}">
+							<span th:text="${p.squadraHome.nome}"></span>
+							<span>-</span>
+							<span th:text="${p.squadraAway.nome}"></span>
+						</a>
+				    </li>
+				</ul>
+				Partite Giocate:	
+				<ul>
+				    <li th:each="p : ${partiteGiocate}">
+						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+						<a th:href="@{'/partite/' + ${p.id}}">
+							<span th:text="${p.squadraHome.nome}"></span>
+							<span th:text="${p.goalsHome}"></span>
+							<span>-</span>
+							<span th:text="${p.goalsAway}"></span>
+							<span th:text="${p.squadraAway.nome}"></span>
+						</a>	
+				    </li>
+				</ul>				
+			</div>
+			
+		</div>
+		<a th:href="@{'/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
+		
+
+
+	</body>
+	
+</html>

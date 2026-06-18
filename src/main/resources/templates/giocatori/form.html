@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New Giocatore</title>
+	</head>
+	
+	<body>
+		<h1 th:text="${giocatore.id != null} ? 'Modifica Giocatore' : 'Aggiungi Giocatore'">Aggiungi Giocatore</h1>
+		<form th:method="POST" th:action="${giocatore.id != null} ? @{'/giocatori/' + ${giocatore.id}} : @{'/squadre/' + ${giocatore.squadra.id} + '/giocatori'}" th:object="${giocatore}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+			</div>
+			<input type="hidden" th:field="*{id}">
+			<div th:if="${giocatore.squadra != null}">
+			    <input type="hidden" th:field="*{squadra.id}">
+			</div>
+			<div>
+				CF: <span><input type="text"  style="text-transform:uppercase	" th:field="${giocatore.codiceFiscale}"></span>
+				<span th:if="${#fields.hasErrors('codiceFiscale')}" th:errors="*{codiceFiscale}"></span>
+			</div>
+			<div>
+				Nome: <span><input type="text" th:field="${giocatore.nome}"></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>
+			<div>
+				Cognome: <span><input type="text" th:field="${giocatore.cognome}"></span>
+				<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+			</div>
+			<div>
+			    Data di nascita: <span><input type="date" th:field="${giocatore.dataNascita}"></span>
+			    <span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></span>
+			</div>
+			<div>
+				Ruolo:<select th:field="${giocatore.ruolo}">
+					<option value="">--Scegli Ruolo--</option>
+					<option th:each="r : ${ruoli}" th:value="${r}" th:text="${r}"></option>
+				</select>
+				<span th:if="${#fields.hasErrors('ruolo')}" th:errors="*{ruolo}"></span>
+			</div>
+			<div>
+				Altezza:<span><input type="text" th:field="${giocatore.altezza}"></span>
+				<span th:if="${#fields.hasErrors('altezza')}" th:errors="*{altezza}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</span>
+			</div>
+		</form>
+
+	</body>
+	
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Arbitro</title>
+	</head>
+	<body>
+		<h1 th:text="${arbitro.nome} +' '+ ${arbitro.cognome}">Nome e cognome Arbitro</h1>
+		Partite Da arbitrare:
+		<ul>
+		    <li th:each="p : ${partiteDaArbitrare}">
+				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+				<a th:href="@{'/partite/' + ${p.id}}">
+					<span th:text="${p.squadraHome.nome}"></span>
+					<span>-</span>
+					<span th:text="${p.squadraAway.nome}"></span>
+				</a>
+				<span>--------</span>
+				<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}"></a>
+		    </li>
+		</ul>
+		Partite Arbitrate:	
+		<ul>
+		    <li th:each="p : ${partiteArbitrate}">
+				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+				<a th:href="@{'/partite/' + ${p.id}}">
+					<span th:text="${p.squadraHome.nome}"></span>
+					<span th:text="${p.goalsHome}"></span>
+					<span>-</span>
+					<span th:text="${p.goalsAway}"></span>
+					<span th:text="${p.squadraAway.nome}"></span>
+				</a>	
+				<span>------</span>
+				<a th:href="@{'/tornei/' +  ${p.torneo.id}}" th:text="${p.torneo.nome}"></a>
+		    </li>
+		</ul>	
+
+	</body>
+	
+</html>

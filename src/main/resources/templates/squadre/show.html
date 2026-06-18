@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Squadra</title>
+	</head>
+	<body>
+		<h1 th:text="${squadra.nome}">Nome Torneo</h1>
+		<div>
+			<div>
+				Anno: <span th:text="${squadra.annoFondazione}"></span>
+			</div>
+			<div>
+				Città:<span th:text="${squadra.citta}"></span>
+			</div>
+			<div>
+				Rosa:
+				<ol>
+					<li th:each="g : ${giocatori}">
+						<a th:href="'/giocatori/' + ${g.id}" th:text="${g.nome + ' '+ g.cognome}"></a>
+						<em th:text="${g.ruolo}"></em>
+					</li>
+				</ol>
+				
+			</div>
+			
+			<div>
+				<a th:href="@{/squadre/{id}/giocatori/new(id=${squadra.id})}">Aggiungi giocatore</a>
+			</div>	
+			
+		</div>
+		
+
+
+	</body>
+	
+</html>

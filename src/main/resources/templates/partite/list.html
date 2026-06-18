@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>List</title>
+	</head>
+	<body>
+		<ul>
+			<li th:each="p : ${partite}">
+				<a th:href="@{'/partite/' + ${p.id}}">
+					<span th:text="${p.squadraHome.nome}"></span>
+					<span th:if="${p.stato.name() == 'SCHEDULED'}">
+						-
+						<span th:text="${p.squadraAway.nome}"></span>
+					</span>
+					<span th:unless="${p.stato.name() == 'SCHEDULED'}">
+						<span th:text="${p.goalsHome + '-' + p.goalsAway}"></span>
+						<span th:text="${p.squadraAway.nome}"></span>
+					</span>
+					
+				</a>
+				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+				<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}"></a>
+			</li>
+		</ul>
+		<div>
+		</div>		
+	</body>
+	
+</html>

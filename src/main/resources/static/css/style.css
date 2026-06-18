@@ -1,0 +1,104 @@
+body{
+    margin: 0; 
+    font-family: Arial, sans-serif;
+    background: rgb(255, 255, 255);
+    color: #1a1a1a;
+}
+
+.nav {
+    display: flex; /* elementi sulla stessa riga*/
+    justify-content: space-between;/* spinge un elemento a sinistra e uno a destra*/
+    align-items: center;
+    padding: 15px 20px;
+    background: #2563eb;
+    color: white;
+}
+
+/* Riguarda i link dentro nav appunto nav a*/
+.nav a {
+    color: white;
+    margin-left: 20px;/*distanza tra torn,gioc,squad */
+    text-decoration: none; /*Toglie la sottolineatura*/
+    font-weight: bold;
+}
+
+.nav a:hover {
+    text-decoration: underline; /*Aggiunge sottolineatura quando passo sopra con il mouse*/
+}
+
+.header {
+    text-align: center; /*Centra il testo*/
+    padding: 50px 25px; /*50 sopra e sotto, 25 destra/sinistsra*/
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    color: white;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+.header p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+/*è il contenitore delle card*/
+.grid {
+    display: flex; /*mette elementi in riga uno accanto all'altro*/
+    justify-content: center; /*li centra orizzontalmente nella pagina*/
+    flex-wrap: wrap; /*Se non ci stanno su una riga vanno sotto*/
+    gap: 25px; /*mette spazio tra le card*/
+    padding: 40px;
+}
+
+
+.card {
+	margin-top:90px;
+    background: white;
+    width: 250px;
+    padding: 25px;
+    border-radius: 12px; /*bordi arrotondati*/
+    box-shadow: 10px 20px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s; /*quando passo sopra rende la transizione morbida*/
+}
+
+.card:hover {
+    transform: translateY(-5px); /*Quando passo sopta la card si sposta leggermente verso l'alto*/
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #2563eb;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #22c55e;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background: #16a34a;
+}
+
+
+footer {
+	margin-top: 200px;
+    text-align: center;
+    padding: 20px;
+    background: #e5e7eb;
+    font-size: 13px;
+}
+
+

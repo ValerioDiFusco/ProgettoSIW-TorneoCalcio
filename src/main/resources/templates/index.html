@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tornei</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+
+<div class="nav">
+    <div><strong>⚽ Tornei Calcio</strong></div>
+    <div>
+        <a href="/tornei">Tornei</a>
+        <a href="/giocatori">Giocatori</a>
+        <a href="/squadre">Squadre</a>
+		<a href="/partite">Calendario</a>
+    </div>
+</div>
+
+
+<div class="header">
+    <h1>Gestione Tornei di Calcio</h1>
+    <p>Esplora squadre, giocatori, partite e classifiche in modo semplice</p>
+</div>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>📊 Tornei</h3>
+        <p>Visualizza tutti i tornei e i dettagli delle competizioni.</p>
+        <a class="button" href="/tornei">Apri</a>
+    </div>
+
+    <div class="card">
+        <h3>⚽ Giocatori</h3>
+        <p>Consulta la lista completa dei giocatori.</p>
+        <a class="button" href="/giocatori">Apri</a>
+    </div>
+
+    <div class="card">
+        <h3>🏟️ Squadre</h3>
+        <p>Scopri le squadre e le loro rose.</p>
+        <a class="button" href="/squadre">Apri</a>
+    </div>
+	
+	<div class="card">
+		<h3>Calendario</h3>
+		<p>Visualizza data e ora delle partite.</p>
+		<a class="button" href="/partite">Apri</a>
+	</div>
+
+</div>
+
+<footer>
+    Progetto SIW - Sistema gestione tornei calcio
+</footer>
+
+</body>
+</html>
