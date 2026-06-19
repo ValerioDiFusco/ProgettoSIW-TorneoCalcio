@@ -58,7 +58,30 @@
 			
 		</div>
 		<a th:href="@{'/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
-		
+		<h2>Classifica</h2>
+		<table border="1">
+		    <thead>
+		        <tr>
+		            <th>Squadra</th>
+		            <th>Giocate</th>
+		            <th>Vinte</th>
+		            <th>Pareggiate</th>
+		            <th>Perse</th>
+		            <th>Punti</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="entry : ${classifica}">
+		            <td th:text="${entry.key.nome}">Nome Squadra</td>
+		            
+		            <td th:text="${entry.value.giocate}">0</td>
+		            <td th:text="${entry.value.vinte}">0</td>
+		            <td th:text="${entry.value.pareggiate}">0</td>
+		            <td th:text="${entry.value.perse}">0</td>
+		            <td th:text="${entry.value.punti}">0</td>
+		        </tr>
+		    </tbody>
+		</table>
 
 
 	</body>

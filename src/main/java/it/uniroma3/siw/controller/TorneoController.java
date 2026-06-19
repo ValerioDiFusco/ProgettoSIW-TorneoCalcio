@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.exception.DuplicateTorneoException;
+import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.model.Torneo;
 import it.uniroma3.siw.service.PartitaService;
@@ -33,7 +35,6 @@ public class TorneoController {
 		this.partitaService = partitaService;
 	}
 	
-	// Visualizzazione elenco tornei
 	@GetMapping("/tornei")
 	public String list(@RequestParam(required = false) String nome, Model model) {
 		if(nome != null && !nome.isBlank()) {
@@ -45,15 +46,15 @@ public class TorneoController {
 		return "tornei/list";
 	}
 	
-	//Visualizzazione dettaglio torno
 	@GetMapping("/tornei/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		Torneo t = this.torneoService.findById(id);
-		//Long squadre= this.squadraService.countByTornei(t);
+		Map<Squadra, Classifica> mappaClassifica = this.torneoService.aggiornaClassifica(t);
 		model.addAttribute("numSquadre", t.getSquadre().size());
 		model.addAttribute("torneo", t);
 		model.addAttribute("partiteGiocate", this.partitaService.findGiocateByTorneo(t));
 		model.addAttribute("partiteProg", this.partitaService.findProgrammateByTorneo(t));
+		model.addAttribute("classifica", mappaClassifica);
 		return "tornei/show";
 	}
 	
@@ -64,7 +65,7 @@ public class TorneoController {
 		model.addAttribute("torneo", t);
 		return "tornei/listSquadre";
 	}
-	//-----------------DA SISTEMARE--------------------
+
 	@GetMapping("/tornei/{id}/squadre/add")
 	public String addSquadra(@PathVariable("id") Long id,Model model) {
 		Torneo t = this.torneoService.findById(id);
@@ -85,7 +86,7 @@ public class TorneoController {
 		this.torneoService.update(t);
 		return "redirect:/tornei/" + id;
 	}
-	//-----------------DA SISTEMARE--------------------
+
 	@GetMapping("/tornei/new")
 	public String createForm(Model model) {
 		model.addAttribute("torneo", new Torneo());
