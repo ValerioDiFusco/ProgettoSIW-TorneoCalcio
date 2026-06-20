@@ -30,7 +30,7 @@
 	<ul class="table">
 		<li th:each="g : ${giocatori}">
 			<a th:href="'/giocatori/' + ${g.id}" th:text="${g.cognome + ' '+ g.nome}"></a>
-			<a th:href="@{'/giocatori/'+ ${g.id} + '/edit'}">Modifica</a>
+			<a th:href="@{'/admin/giocatori/'+ ${g.id} + '/edit'}">Modifica</a>
 			<span th:text="${g.squadra.nome}"></span>
 		</li>
 	</ul>

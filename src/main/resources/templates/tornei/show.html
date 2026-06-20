@@ -24,10 +24,10 @@
 				<div th:text="${torneo.descrizione}"></div>
 			</div>
 			<div>
-				<a th:href="@{'/tornei/' + ${torneo.id} + '/squadre/add'}">Iscrivi Squadra</a>
+				<a th:href="@{'/admin/tornei/' + ${torneo.id} + '/squadre/add'}">Iscrivi Squadra</a>
 			</div>
 			<div>
-				<a th:href="@{'/tornei/{id}/partite/new'(id=${torneo.id})}"> Aggiungi partita</a>
+				<a th:href="@{'/admin/tornei/{id}/partite/new'(id=${torneo.id})}"> Aggiungi partita</a>
 			</div>
 			<div>
 			    Partite Programmate:
@@ -57,7 +57,7 @@
 			</div>
 			
 		</div>
-		<a th:href="@{'/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
+		<a th:href="@{'/admin/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
 		<h2>Classifica</h2>
 		<table border="1">
 		    <thead>

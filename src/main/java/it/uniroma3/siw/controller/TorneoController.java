@@ -66,16 +66,16 @@ public class TorneoController {
 		return "tornei/listSquadre";
 	}
 
-	@GetMapping("/tornei/{id}/squadre/add")
+	@GetMapping("/admin/tornei/{id}/squadre/add")
 	public String addSquadra(@PathVariable("id") Long id,Model model) {
 		Torneo t = this.torneoService.findById(id);
 		List<Squadra> allSquadre = this.squadraService.findAll();
 		allSquadre.removeAll(t.getSquadre());
 		model.addAttribute("torneo", t);
 		model.addAttribute("squadre", allSquadre);
-		return "tornei/addSquadra";
+		return "admin/tornei/addSquadra";
 	}
-	@PostMapping("/tornei/{id}/squadre")
+	@PostMapping("/admin/tornei/{id}/squadre")
 	public String addSquadra(@PathVariable Long id, @RequestParam List<Long> squadreId) { //metto la lista di Long perchè psso far sicrivere più sqadre
 		Torneo t = this.torneoService.findById(id);
 		List<Squadra> squadre = this.squadraService.findAllById(squadreId);
@@ -87,16 +87,16 @@ public class TorneoController {
 		return "redirect:/tornei/" + id;
 	}
 
-	@GetMapping("/tornei/new")
+	@GetMapping("/admin/tornei/new")
 	public String createForm(Model model) {
 		model.addAttribute("torneo", new Torneo());
-		return "tornei/form";
+		return "admin/tornei/form";
 	}
 	
-	@PostMapping("/tornei")
+	@PostMapping("/admin/tornei")
 	public String save(@Valid @ModelAttribute("torneo") Torneo torneo, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			return "tornei/form";
+			return "admin/tornei/form";
 		}
 		try {
 			this.torneoService.save(torneo);
@@ -104,22 +104,22 @@ public class TorneoController {
 		}
 		catch (DuplicateTorneoException e) {
 			bindingResult.reject("torneo.duplicate");
-			return "tornei/form";
+			return "admin/tornei/form";
 		}
 	}
 	
-	@GetMapping("/tornei/{id}/edit")
+	@GetMapping("/admin/tornei/{id}/edit")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		Torneo torneo = this.torneoService.findById(id);
 		model.addAttribute("torneo", torneo);
-		return "tornei/form";
+		return "admin/tornei/form";
 	}
 	
-	@PostMapping("/tornei/{id}")
+	@PostMapping("/admin/tornei/{id}")
 	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute ("torneo") Torneo torneo, BindingResult bindingResult,
 			Model model) {
 		if(bindingResult.hasErrors()) {
-			return "tornei/form";
+			return "admin/tornei/form";
 		}
 		else {
 			torneo.setId(id);

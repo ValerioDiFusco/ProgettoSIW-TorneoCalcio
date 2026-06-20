@@ -52,7 +52,7 @@ public class PartitaController {
 		return "partite/list";
 	}
 	
-	@GetMapping("/tornei/{id}/partite/new")
+	@GetMapping("/admin/tornei/{id}/partite/new")
 	public String createForm(@PathVariable("id") Long id,Model model) {
 		Partita partita = new Partita();
 		partita.setTorneo(this.torneoService.findById(id));
@@ -60,10 +60,10 @@ public class PartitaController {
 		model.addAttribute("torneo", this.torneoService.findById(id));
 		model.addAttribute("squadre",this.squadraService.findByTorneiId(id));
 		model.addAttribute("arbitri",this.arbitroService.findAll());
-		return "partite/form";
+		return "admin/partite/form";
 	}
 	
-	@PostMapping("/tornei/{id}/partite")
+	@PostMapping("/admin/tornei/{id}/partite")
 	public String save(@PathVariable("id") Long id,@Valid @ModelAttribute("partita") Partita partita, BindingResult bindingResult, Model model) {
 		if(partita.getSquadraHome() == null || partita.getSquadraAway() == null) {
 			bindingResult.reject("squadre.mancanti");
@@ -75,7 +75,7 @@ public class PartitaController {
 			model.addAttribute("torneo", this.torneoService.findById(id));
 			model.addAttribute("squadre", this.squadraService.findByTorneiId(id));
 			model.addAttribute("arbitri", this.arbitroService.findAll());
-			return "partite/form";
+			return "admin/partite/form";
 		}
 		partita.setId(null);
 		partita.setTorneo(this.torneoService.findById(id));
@@ -85,13 +85,13 @@ public class PartitaController {
 		
 	}
 	
-	@GetMapping("/partite/{id}/addRisultato")
+	@GetMapping("/admin/partite/{id}/addRisultato")
 	public String createFormRisultato(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("partita", this.partitaService.findById(id));
-		return "partite/risultato";
+		return "admin/partite/risultato";
 	}
 	
-	@PostMapping("/partite/{id}/risultato")
+	@PostMapping("/admin/partite/{id}/risultato")
 	public String saveResult(@PathVariable Long id,
 	                         @ModelAttribute("partita") Partita partita,
 	                         BindingResult bindingResult,Model model) {
@@ -109,7 +109,7 @@ public class PartitaController {
 	    		partita.setId(id);
 		    partita.setSquadraHome(dbPartita.getSquadraHome());
 	        partita.setSquadraAway(dbPartita.getSquadraAway());
-	        return "partite/risultato";
+	        return "admin/partite/risultato";
 	    }
 	    
 	    dbPartita.setGoalsHome(partita.getGoalsHome());

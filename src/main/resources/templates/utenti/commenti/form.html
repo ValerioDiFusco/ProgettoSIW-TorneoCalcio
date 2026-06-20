@@ -4,7 +4,7 @@
 		<title>Commenti</title>
 	</head>
 	<body>
-		<form th:action="@{'/partite/{id}/commenti'(id=${commento.partita.id})}" th:method="POST" th:object="${commento}">
+		<form th:action="@{'/utenti/partite/{id}/commenti'(id=${commento.partita.id})}" th:method="POST" th:object="${commento}">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
 			</div>

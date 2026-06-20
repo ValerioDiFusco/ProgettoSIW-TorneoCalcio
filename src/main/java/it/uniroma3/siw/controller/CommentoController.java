@@ -24,20 +24,20 @@ public class CommentoController {
 		this.partitaService = partitaService;
 	}
 	
-	@GetMapping("/partite/{id}/commenti/new")
+	@GetMapping("/utenti/partite/{id}/commenti/new")
 	public String createForm(@PathVariable("id") Long id, Model model) {
 		Commento commento = new Commento();
 		commento.setPartita(this.partitaService.findById(id));
 		model.addAttribute("commento", commento);
-		return "commenti/form";
+		return "utenti/commenti/form";
 		
 	}
 	
-	@PostMapping("/partite/{id}/commenti")
+	@PostMapping("/utenti/partite/{id}/commenti")
 	public String save(@PathVariable("id") Long id, @Valid @ModelAttribute("commento") Commento commento, BindingResult bindingResult,
 			Model model) {
 		if(bindingResult.hasErrors()) {
-			return "commenti/form";
+			return "utenti/commenti/form";
 		}
 		commento.setId(null);
 		commento.setPartita(this.partitaService.findById(id));

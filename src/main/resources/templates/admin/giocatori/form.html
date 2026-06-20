@@ -6,7 +6,7 @@
 	
 	<body>
 		<h1 th:text="${giocatore.id != null} ? 'Modifica Giocatore' : 'Aggiungi Giocatore'">Aggiungi Giocatore</h1>
-		<form th:method="POST" th:action="${giocatore.id != null} ? @{'/giocatori/' + ${giocatore.id}} : @{'/squadre/' + ${giocatore.squadra.id} + '/giocatori'}" th:object="${giocatore}">
+		<form th:method="POST" th:action="${giocatore.id != null} ? @{'/admin/giocatori/' + ${giocatore.id}} : @{'/admin/squadre/' + ${giocatore.squadra.id} + '/giocatori'}" th:object="${giocatore}">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
 			</div>

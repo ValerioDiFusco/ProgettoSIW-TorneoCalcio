@@ -21,7 +21,7 @@
 		</div>
 		
 		<div>
-			<a th:href="@{'/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
+			<a th:href="@{'/admin/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
 		</div>
 		<h2>Commenti
 			(<span th:text="${nCommenti}"></span>)
@@ -40,7 +40,7 @@
 				</table>
 				<br>
 		<div>
-			<a th:href="@{'/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
+			<a th:href="@{'/utenti/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
 		</div>
 
 	</body>

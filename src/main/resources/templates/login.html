@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    
+    <div th:if="${param.error}" style="color: red;">
+        <p>Username o password errati.</p>
+    </div>
+
+    <form th:action="@{/login}" th:method="POST">
+        <div>
+            Username: <span><input type="text" name="username" required></span>
+        </div>
+        <div>
+            Password: <span><input type="password" name="password" required></span>
+        </div>
+        <div>
+            <span><button type="submit">Conferma</button></span>
+			<span><a th:href = "@{/register}">Non hai ancora un account? Registrati</a></span>
+        </div>
+		
+    </form>
+</body>
+</html>

@@ -7,7 +7,7 @@
 	<body>
 		<h1 th:text="${torneo.id != null} ? 'Modifica Torneo' : 'Aggiungi Torneo'">Aggiungi Torneo</h1>
 		<form th:method="POST" 
-		          th:action="${torneo.id != null} ? @{/tornei/{id}(id=${torneo.id})} : @{/tornei}" 
+		          th:action="${torneo.id != null} ? @{/admin/tornei/{id}(id=${torneo.id})} : @{/admin/tornei}" 
 		          th:object="${torneo}">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>

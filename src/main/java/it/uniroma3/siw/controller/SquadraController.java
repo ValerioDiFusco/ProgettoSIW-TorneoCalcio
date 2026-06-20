@@ -48,16 +48,16 @@ public class SquadraController {
 		return "squadre/list";
 	}
 	
-	@GetMapping("/squadre/new")
+	@GetMapping("/admin/squadre/new")
 	public String createForm(Model model) {
 		model.addAttribute("squadra", new Squadra());
-		return "squadre/form";
+		return "admin/squadre/form";
 	}
 	
-	@PostMapping("/squadre")
+	@PostMapping("/admin/squadre")
 	public String save(@Valid @ModelAttribute("squadra") Squadra squadra, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			return "squadre/form";
+			return "admin/squadre/form";
 		}
 		try {
 			this.squadraService.save(squadra);
@@ -65,7 +65,7 @@ public class SquadraController {
 		}
 		catch (DuplicateSquadraException e) {
 			bindingResult.reject("squadra.duplicate");
-			return "squadre/form";
+			return "admin/squadre/form";
 		}
 	}
 

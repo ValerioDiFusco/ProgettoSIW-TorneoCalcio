@@ -6,7 +6,7 @@
 	
 	<body>
 		<h1> Registrazione Partita</h1>
-		<form th:method="POST" th:action="@{/tornei/{id}/partite(id=${torneo.id})}" th:object="${partita}">
+		<form th:method="POST" th:action="@{/admin/tornei/{id}/partite(id=${torneo.id})}" th:object="${partita}">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
 			</div>

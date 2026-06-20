@@ -59,20 +59,20 @@ public class GiocatoreController {
 		return "giocatori/show";
 	}
 	
-	@GetMapping("/squadre/{id}/giocatori/new")
+	@GetMapping("/admin/squadre/{id}/giocatori/new")
 	public String createForm(@PathVariable("id") Long id, Model model) {
 		Giocatore giocatore = new Giocatore();
 		giocatore.setSquadra(this.squadraService.findById(id));
 		model.addAttribute("giocatore", giocatore);
 		model.addAttribute("ruoli", Ruolo.values());
-		return "giocatori/form";
+		return "admin/giocatori/form";
 	}
 	
-	@PostMapping("/squadre/{id}/giocatori")
+	@PostMapping("/admin/squadre/{id}/giocatori")
 	public String save(@PathVariable("id") Long id,@Valid @ModelAttribute("giocatore") Giocatore giocatore, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("ruoli", Ruolo.values());
-			return "giocatori/form";
+			return "admin/giocatori/form";
 		}
 		try {
 			giocatore.setSquadra(this.squadraService.findById(id));
@@ -82,27 +82,27 @@ public class GiocatoreController {
 		catch(DuplicateGiocatoreException e) {
 			bindingResult.reject("giocatore.duplicate");
 			model.addAttribute("ruoli", Ruolo.values());
-			return "giocatori/form";
+			return "admin/giocatori/form";
 		}
 	}
 	
-	@GetMapping("/giocatori/{id}/edit")
+	@GetMapping("/admin/giocatori/{id}/edit")
 	public String edit(@PathVariable Long id,Model model) {
 		Giocatore giocatore = this.giocatoreService.findById(id);
 		model.addAttribute("giocatore", giocatore);
 		model.addAttribute("ruoli", Ruolo.values());
 		model.addAttribute("squadre", this.squadraService.findAll());
-		return "giocatori/form";
+		return "admin/giocatori/form";
 	}
 	
-	@PostMapping("/giocatori/{id}")
+	@PostMapping("/admin/giocatori/{id}")
 	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("giocatore") Giocatore giocatore,
 			BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("ruoli", Ruolo.values());
 			model.addAttribute("squadre", this.squadraService.findAll());
-			return "giocatori/form";
+			return "admin/giocatori/form";
 		}
 		else {
 			giocatore.setId(id);
