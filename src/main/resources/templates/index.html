@@ -16,6 +16,15 @@
         <a href="/giocatori">Giocatori</a>
         <a href="/squadre">Squadre</a>
 		<a href="/partite">Calendario</a>
+		<span th:if="${userDetails == null}">
+			<a href="/login">Log in</a>
+		</span>
+		<span th:if="${userDetails != null}">
+		    <form th:action="@{/logout}" method="POST">
+		        <button type="submit" class="btn-logout">Log out</button>
+		    </form>
+		</span>
+
     </div>
 </div>
 

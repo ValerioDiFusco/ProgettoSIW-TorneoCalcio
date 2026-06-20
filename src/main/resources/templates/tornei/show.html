@@ -23,10 +23,10 @@
 				Descrizione:
 				<div th:text="${torneo.descrizione}"></div>
 			</div>
-			<div>
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 				<a th:href="@{'/admin/tornei/' + ${torneo.id} + '/squadre/add'}">Iscrivi Squadra</a>
 			</div>
-			<div>
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 				<a th:href="@{'/admin/tornei/{id}/partite/new'(id=${torneo.id})}"> Aggiungi partita</a>
 			</div>
 			<div>
@@ -57,7 +57,10 @@
 			</div>
 			
 		</div>
-		<a th:href="@{'/admin/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
+		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
+			<a th:href="@{'/admin/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
+		</div>
+		
 		<h2>Classifica</h2>
 		<table border="1">
 		    <thead>

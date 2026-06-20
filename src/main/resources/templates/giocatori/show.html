@@ -17,6 +17,9 @@
 			</div>
 			<div>
 				Altezza: <span th:text="${giocatore.altezza}"></span>
+			</div>
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
+				<a th:href="@{'/admin/giocatori/'+ ${giocatore.id} + '/edit'}">Modifica</a>				
 			</div>	
 			
 		</div>

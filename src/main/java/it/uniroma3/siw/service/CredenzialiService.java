@@ -3,6 +3,7 @@ package it.uniroma3.siw.service;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Credenziali;
+import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.repository.CredenzialiRepository;
 
 @Service
@@ -22,7 +23,12 @@ public class CredenzialiService {
 		return this.credenzialiRepository.findByUsername(username).get();
 	}
 	
+	public Credenziali findByUtente(Utente utente) {
+		return this.credenzialiRepository.findByUtente(utente);
+	}
+	
 	public Credenziali save(Credenziali credenziali) {
 		return this.credenzialiRepository.save(credenziali);
 	}
+	
 }

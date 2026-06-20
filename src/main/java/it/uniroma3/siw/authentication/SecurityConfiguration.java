@@ -41,7 +41,7 @@ public class SecurityConfiguration {
 	@Bean
 	protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.authorizeHttpRequests(authorize -> {
-			  authorize.requestMatchers(HttpMethod.GET, "/","/login", "/index", "/register", "/css/**", "/images/**",   
+			  authorize.requestMatchers(HttpMethod.GET, "/","/login", "/index","/tornei/**","/squadre/**","/partite/**","/giocatori/**","/arbitri/**", "/register", "/css/**", "/images/**",   
                       "/favicon.ico").permitAll();
 			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
 			authorize.requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credenziali.ADMIN_ROLE);

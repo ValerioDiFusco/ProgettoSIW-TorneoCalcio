@@ -20,28 +20,34 @@
 			Arbitro (COD):<a th:href="@{'/arbitri/' + ${arbitro.id}}" th:text="${arbitro.codiceArbitro}"></a>
 		</div>
 		
-		<div>
+		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 			<a th:href="@{'/admin/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
 		</div>
-		<h2>Commenti
-			(<span th:text="${nCommenti}"></span>)
-		</h2>
-		<table th:each="c : ${partita.commenti}" border="1">
-					<thead>
-						<tr>
-							<th th:text="${c.titolo}">Titolo del commento</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td th:text="${c.descrizione}">Descrizione del commento</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-		<div>
-			<a th:href="@{'/utenti/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
+		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('DEFAULT')}">
+			<h2>Commenti (<span th:text="${nCommenti}"></span>)</h2>
+
+			<div th:each="c : ${partita.commenti}">
+			    
+			    <h3 th:text="${c.titolo}">Titolo del commento</h3>
+			    
+			    <p th:text="${c.descrizione}">Descrizione del commento</p>
+				<span>Scritto da: <strong th:text="${c.utente.nome} + ' ' + ${c.utente.cognome}">Nome Cognome</strong></span>
+			    
+			    
+			    <span>
+			        <a th:href="@{'/utenti/commenti/' + ${c.id} + '/edit'}">Modifica</a>
+			    </span>
+			    
+			    <hr> 
+			</div>
+
+			<br>
+
+			<div>
+			    <a th:href="@{'/utenti/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
+			</div>
 		</div>
+
 
 	</body>
 	

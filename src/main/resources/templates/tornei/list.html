@@ -15,7 +15,7 @@
 				th:text="${torneo.nome}">Nome Torneo</a>
 			</li>
 		</ul>
-		<div>
+		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 			<a th:href="@{'/admin/tornei/new'}">Aggiungi Torneo</a>
 		</div>
 		

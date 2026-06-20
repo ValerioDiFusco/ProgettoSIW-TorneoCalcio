@@ -68,6 +68,25 @@ public class SquadraController {
 			return "admin/squadre/form";
 		}
 	}
+	
+	@GetMapping("/admin/squadre/{id}/edit")
+	public String edit(@PathVariable("id") Long id, Model model) {
+		Squadra squadra = this.squadraService.findById(id);
+		model.addAttribute("squadra", squadra);
+		return "admin/squadre/form";
+	}
+	
+	@PostMapping("/admin/squadre/{id}")
+	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("squadra") Squadra squadra,BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			return "admin/squadre/form";
+		}
+		else {
+			squadra.setId(id);
+			this.squadraService.update(squadra);
+			return "redirect:/squadre/" +id;
+		}
+	}
 
 	
 }

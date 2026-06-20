@@ -11,7 +11,10 @@
 				th:text="${s.nome}">Nome Squadra</a>
 			</li>
 		</ul>
-		<a th:href="@{'/admin/squadre/new'}">Aggiungi Squadra</a>
+		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
+			<a th:href="@{'/admin/squadre/new'}">Aggiungi Squadra</a>
+		</div>
+		
 	</body>
 	
 </html>

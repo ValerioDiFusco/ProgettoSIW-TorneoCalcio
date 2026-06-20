@@ -5,8 +5,8 @@
 	</head>
 	
 	<body>
-		<h1> Aggiungi Squadra</h1>
-		<form th:method="POST" th:action="@{/admin/squadre}" th:object="${squadra}">
+		<h1 th:text="${squadra.id != null} ? 'Modifica Squadra' : 'Aggiungi Squadra'">Aggiungi Squadra</h1>
+		<form th:method="POST" th:action="${squadra.id != null} ? @{/admin/squadre/{id}(id=${squadra.id})} : @{/admin/squadre}" th:object="${squadra}">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
 			</div>

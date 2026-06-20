@@ -54,4 +54,9 @@ public class SquadraService {
 		}
 		return this.squadraRepository.save(squadra);
 	}
+	
+	@Transactional
+	public Squadra update(Squadra squadra) {
+		return this.squadraRepository.save(squadra);
+	}
 }
