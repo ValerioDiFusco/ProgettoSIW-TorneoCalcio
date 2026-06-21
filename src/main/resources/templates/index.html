@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html>
 <head>
     <title>Tornei</title>
-	<link rel="stylesheet" th:href="@{/css/style.css}">
-
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
 
-
 <div class="nav">
-    <div><strong>⚽ Tornei Calcio</strong></div>
+    <div class="nav-logo-section">
+        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+        
+		<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+		            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+		        </span>
+		        
+		        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+		            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+		                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+		            </form>
+		        </span>
+    </div>
+    
     <div>
-        <a href="/tornei">Tornei</a>
-        <a href="/giocatori">Giocatori</a>
-        <a href="/squadre">Squadre</a>
-		<a href="/partite">Calendario</a>
-		<span th:if="${userDetails == null}">
-			<a href="/login">Log in</a>
-		</span>
-		<span th:if="${userDetails != null}">
-		    <form th:action="@{/logout}" method="POST">
-		        <button type="submit" class="btn-logout">Log out</button>
-		    </form>
-		</span>
-
+        <a th:href="@{/tornei}">Tornei</a>
+        <a th:href="@{/giocatori}">Giocatori</a>
+        <a th:href="@{/squadre}">Squadre</a>
+        <a th:href="@{/partite}">Calendario</a>
     </div>
 </div>
-
 
 <div class="header">
     <h1>Gestione Tornei di Calcio</h1>
@@ -35,31 +34,29 @@
 </div>
 
 <div class="grid">
-
     <div class="card">
         <h3>📊 Tornei</h3>
         <p>Visualizza tutti i tornei e i dettagli delle competizioni.</p>
-        <a class="button" href="/tornei">Apri</a>
+        <a class="button" th:href="@{/tornei}">Apri</a>
     </div>
 
     <div class="card">
         <h3>⚽ Giocatori</h3>
         <p>Consulta la lista completa dei giocatori.</p>
-        <a class="button" href="/giocatori">Apri</a>
+        <a class="button" th:href="@{/giocatori}">Apri</a>
     </div>
 
     <div class="card">
         <h3>🏟️ Squadre</h3>
         <p>Scopri le squadre e le loro rose.</p>
-        <a class="button" href="/squadre">Apri</a>
+        <a class="button" th:href="@{/squadre}">Apri</a>
     </div>
 	
-	<div class="card">
-		<h3>Calendario</h3>
-		<p>Visualizza data e ora delle partite.</p>
-		<a class="button" href="/partite">Apri</a>
-	</div>
-
+    <div class="card">
+        <h3>📅 Calendario</h3>
+        <p>Visualizza data e ora delle partite.</p>
+        <a class="button" th:href="@{/partite}">Apri</a>
+    </div>
 </div>
 
 <footer>

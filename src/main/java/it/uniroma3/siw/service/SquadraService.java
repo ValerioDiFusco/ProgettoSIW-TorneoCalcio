@@ -59,4 +59,8 @@ public class SquadraService {
 	public Squadra update(Squadra squadra) {
 		return this.squadraRepository.save(squadra);
 	}
+	
+	public void delete(Long id) {
+		this.squadraRepository.deleteById(id);
+	}
 }

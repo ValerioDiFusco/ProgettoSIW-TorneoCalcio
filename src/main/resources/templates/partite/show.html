@@ -23,6 +23,11 @@
 		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 			<a th:href="@{'/admin/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
 		</div>
+		<span th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
+			<form th:action="@{/admin/partite/{id}/delete(id=${partita.id})}" method="POST">
+			    <button type="submit" class="button-delete">Elimina</button>
+			</form>
+		</span>	
 		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('DEFAULT')}">
 			<h2>Commenti (<span th:text="${nCommenti}"></span>)</h2>
 

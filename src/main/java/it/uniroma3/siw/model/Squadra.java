@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,7 +33,7 @@ public class Squadra {
 	
 	@NotNull
 	@Min(1857)
-	//massimo anno corrente
+	@Max(2026)
 	@Column(nullable = false)
 	private Integer annoFondazione;
 	
@@ -45,6 +46,12 @@ public class Squadra {
 	
 	@ManyToMany
 	private List<Torneo> tornei = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "squadraHome", cascade = CascadeType.REMOVE)
+	private List<Partita> partiteInCasa = new ArrayList<>();
+
+	@OneToMany(mappedBy = "squadraAway", cascade = CascadeType.REMOVE)
+	private List<Partita> partiteInTrasferta = new ArrayList<>();
 	
 	public Squadra() {
 		
@@ -102,6 +109,24 @@ public class Squadra {
 
 	public void setTornei(List<Torneo> tornei) {
 		this.tornei = tornei;
+	}
+	
+	
+
+	public List<Partita> getPartiteInCasa() {
+		return partiteInCasa;
+	}
+
+	public void setPartiteInCasa(List<Partita> partiteInCasa) {
+		this.partiteInCasa = partiteInCasa;
+	}
+
+	public List<Partita> getPartiteInTrasferta() {
+		return partiteInTrasferta;
+	}
+
+	public void setPartiteInTrasferta(List<Partita> partiteInTrasferta) {
+		this.partiteInTrasferta = partiteInTrasferta;
 	}
 
 	@Override

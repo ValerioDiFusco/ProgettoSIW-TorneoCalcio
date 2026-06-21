@@ -29,7 +29,13 @@
 			
 			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
 				<a th:href="@{/admin/squadre/{id}/edit(id=${squadra.id})}">Modifica Squadra</a>
-			</div>	
+			</div>
+			
+			<span th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
+				<form th:action="@{/admin/squadre/{id}/delete(id=${squadra.id})}" method="POST">
+				    <button type="submit" class="button-delete">Elimina</button>
+				</form>
+			</span>	
 			
 		</div>
 		

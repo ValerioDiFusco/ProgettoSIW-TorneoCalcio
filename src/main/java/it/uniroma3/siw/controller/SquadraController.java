@@ -87,6 +87,11 @@ public class SquadraController {
 			return "redirect:/squadre/" +id;
 		}
 	}
+	@PostMapping("/admin/squadre/{id}/delete")
+	public String delete(@PathVariable("id") Long id) {
+		this.squadraService.delete(id);
+		return "redirect:/squadre";
+	}
 
 	
 }

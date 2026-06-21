@@ -122,5 +122,11 @@ public class PartitaController {
 	    return "redirect:/partite/" + id;
 	}
 	
+	@PostMapping("/admin/partite/{id}/delete")
+	public String delete(@PathVariable("id") Long id) {
+		this.partitaService.delete(id);
+		return "redirect:/partite";
+	}
+	
 	
 }

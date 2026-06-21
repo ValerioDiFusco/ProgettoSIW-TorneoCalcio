@@ -1,102 +1,175 @@
-body{
-    margin: 0; 
-    font-family: Arial, sans-serif;
-    background: rgb(255, 255, 255);
-    color: #1a1a1a;
-}
-
 .nav {
-    display: flex; /* elementi sulla stessa riga*/
-    justify-content: space-between;/* spinge un elemento a sinistra e uno a destra*/
+    display: flex; 
+    justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
     background: #2563eb;
     color: white;
 }
 
-/* Riguarda i link dentro nav appunto nav a*/
+.nav-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-auth-inline {
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-auth-inline form {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
 .nav a {
     color: white;
-    margin-left: 20px;/*distanza tra torn,gioc,squad */
-    text-decoration: none; /*Toglie la sottolineatura*/
+    margin-left: 20px;
+    text-decoration: none;
     font-weight: bold;
+}
+
+.nav-logo-section a {
+    margin-left: 0;
 }
 
 .nav a:hover {
-    text-decoration: underline; /*Aggiunge sottolineatura quando passo sopra con il mouse*/
+    text-decoration: underline; 
 }
 
-.header {
-    text-align: center; /*Centra il testo*/
-    padding: 50px 25px; /*50 sopra e sotto, 25 destra/sinistsra*/
-    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+.btn-login-inline {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: none !important;
+    margin-left: 10px !important;
+}
+
+.btn-login-inline:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-logout-inline {
+    background-color: #ef4444; 
     color: white;
+    border: none;
+    padding: 5px 12px;
+    margin-left: 10px;       
+    border-radius: 4px;      
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 38px;
+.btn-logout-inline:hover {
+    background-color: #dc2626; 
 }
 
-.header p {
-    margin-top: 10px;
-    font-size: 16px;
+body.login-page {
+    background-color: rgb(236, 245, 253); 
 }
-/*è il contenitore delle card*/
-.grid {
-    display: flex; /*mette elementi in riga uno accanto all'altro*/
-    justify-content: center; /*li centra orizzontalmente nella pagina*/
-    flex-wrap: wrap; /*Se non ci stanno su una riga vanno sotto*/
-    gap: 25px; /*mette spazio tra le card*/
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
     padding: 40px;
-}
-
-
-.card {
-	margin-top:90px;
     background: white;
-    width: 250px;
-    padding: 25px;
-    border-radius: 12px; /*bordi arrotondati*/
-    box-shadow: 10px 20px 30px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: 0.3s; /*quando passo sopra rende la transizione morbida*/
 }
 
-.card:hover {
-    transform: translateY(-5px); /*Quando passo sopta la card si sposta leggermente verso l'alto*/
-}
-
-.card h3 {
-    margin-top: 0;
+.login-container h1 {
     color: #2563eb;
+    margin-bottom: 25px;
+    font-size: 28px;
 }
 
-.card p {
+.error-message {
+    color: #ef4444;
+    background-color: #ffeeef;
+    padding: 10px;
+    border-radius: 10px; /*angoli arrotondati*/
+    margin-bottom: 20px;
     font-size: 14px;
-    color: #555;
-}
-
-.button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: #22c55e;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
     font-weight: bold;
 }
 
-.button:hover {
+.login-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px; /*Distanza tra username e psw*/
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
     background: #16a34a;
 }
 
-
-footer {
-	margin-top: 200px;
-    text-align: center;
-    padding: 20px;
-    background: #e5e7eb;
+.link-register {
+    color: #2563eb;
+    text-decoration: none;
     font-size: 13px;
+    font-weight: bold;
+}
+
+.link-register:hover {
+    text-decoration: underline;
+}
+/* Errore specifico sotto i campi di input della registrazione */
+.error-message-inline {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 4px 0 0 0;
 }
