@@ -41,7 +41,6 @@ public class PartitaController {
 	public String show(@PathVariable("id") Long id, Model model) {
 		Partita p = this.partitaService.findById(id);
 		model.addAttribute("partita", p);
-		model.addAttribute("arbitro",p.getArbitro());
 		model.addAttribute("nCommenti", this.commentoService.countByPartitaId(id));
 		return "partite/show";
 	}

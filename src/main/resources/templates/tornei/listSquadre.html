@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Lista</title>
-	</head>
-	
-	<body>
-		<ul>
-			<li th:each="squadra : ${listaSquadre}">
-				<a th:href="@{'/squadre/'+ ${squadra.id}}"
-				th:text="${squadra.nome}">Nome Squadra</a>
-			</li>
-		</ul>
-	</body>
-	
+<head>
+    <title>Lista Squadre</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="nav">
+	    <div class="nav-logo-section">
+	        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+	        
+			<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+			            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+			        </span>
+			        
+			        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+			            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+			                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+			            </form>
+			        </span>
+	    </div>
+	    
+	    <div>
+	        <a th:href="@{/tornei}">Tornei</a>
+	        <a th:href="@{/giocatori}">Giocatori</a>
+	        <a th:href="@{/squadre}">Squadre</a>
+	        <a th:href="@{/partite}">Calendario</a>
+	    </div>
+	</div>
+
+    <div class="header-list">
+        <h1>Squadre Partecipanti</h1>
+        <p>Seleziona una squadra per vedere i dettagli e i componenti della rosa</p>
+    </div>
+
+    <div class="list-container view-container">
+        
+        <ul class="item-list">
+            <li th:each="squadra : ${listaSquadre}" class="item-element">
+                <a th:href="@{'/squadre/'+ ${squadra.id}}" th:text="${squadra.nome}" class="item-link">Nome Squadra</a>
+            </li>
+        </ul>
+        
+    </div>
+	<footer>
+	    Progetto SIW - Sistema gestione tornei calcio
+	</footer>
+
+</body>
 </html>

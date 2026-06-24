@@ -5,23 +5,28 @@
 </head>
 <body class="login-page">
 
-<div class="login-container">
-    <h1>Login</h1>
+<div class="login-container view-container form-container">
+    <div class="torneo-header">
+        <h1>Login</h1>
+    </div>
     
-    <div th:if="${param.error}" class="error-message">
+    <div th:if="${param.error}" class="error-global">
         <p>Username o password errati.</p>
     </div>
 
-    <form th:action="@{/login}" th:method="POST" class="login-form">
+    <form th:action="@{/login}" th:method="POST" class="custom-form login-form">
         <div class="form-group">
-            Username: <span><input type="text" name="username" required></span>
+            <label class="form-label">Username:</label>
+            <span><input type="text" name="username" class="search-input form-input" placeholder="Inserisci username" required></span>
         </div>
         <div class="form-group">
-            Password: <span><input type="password" name="password" required></span>
+            <label class="form-label">Password:</label>
+            <span><input type="password" name="password" class="search-input form-input" placeholder="Inserisci password" required></span>
         </div>
-        <div class="form-actions">
-            <span><button type="submit" class="btn-submit">Conferma</button></span>
-            <span><a th:href="@{/register}" class="link-register">Non hai ancora un account? Registrati</a></span>
+        <div class="form-actions form-submit-block">
+            <span><button type="submit" class="button admin-btn form-btn btn-submit">Conferma</button></span>
+            <br><br>
+            <span><a th:href="@{/register}" class="tournament-link link-register">Non hai ancora un account? Registrati</a></span>
         </div>
     </form>
 </div>

@@ -2,38 +2,74 @@
 <html>
 	<head>
 		<title>Arbitro</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	<body>
-		<h1 th:text="${arbitro.nome} +' '+ ${arbitro.cognome}">Nome e cognome Arbitro</h1>
-		Partite Da arbitrare:
-		<ul>
-		    <li th:each="p : ${partiteDaArbitrare}">
-				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
-				<a th:href="@{'/partite/' + ${p.id}}">
-					<span th:text="${p.squadraHome.nome}"></span>
-					<span>-</span>
-					<span th:text="${p.squadraAway.nome}"></span>
-				</a>
-				<span>--------</span>
-				<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}"></a>
-		    </li>
-		</ul>
-		Partite Arbitrate:	
-		<ul>
-		    <li th:each="p : ${partiteArbitrate}">
-				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
-				<a th:href="@{'/partite/' + ${p.id}}">
-					<span th:text="${p.squadraHome.nome}"></span>
-					<span th:text="${p.goalsHome}"></span>
-					<span>-</span>
-					<span th:text="${p.goalsAway}"></span>
-					<span th:text="${p.squadraAway.nome}"></span>
-				</a>	
-				<span>------</span>
-				<a th:href="@{'/tornei/' +  ${p.torneo.id}}" th:text="${p.torneo.nome}"></a>
-		    </li>
-		</ul>	
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
+		</div>
+		
+		<div class="list-container view-container">
+			
+			<div class="torneo-header">
+				<h1 th:text="${arbitro.nome} +' '+ ${arbitro.cognome}">Nome e cognome Arbitro</h1>
+				<span th:text="${arbitro.codiceArbitro}">codice Arbitro</span>
+			</div>
+			
+			<div class="partite-section">
+				<h2 class="section-title">📅 Partite Da Arbitrare</h2>
+				<ul class="item-list">
+					<li th:each="p : ${partiteDaArbitrare}" class="page-match-item">
+						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date"></span>
+						<a th:href="@{'/partite/' + ${p.id}}" class="match-link">
+							<span th:text="${p.squadraHome.nome}" class="team-name-inline"></span>
+							<span class="vs-divider">-</span>
+							<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
+						</a>
+						<span class="separator-dash">--------</span>
+						<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
+					</li>
+				</ul>
+				
+				<h2 class="section-title">⚽ Partite Arbitrate</h2>	
+				<ul class="item-list">
+					<li th:each="p : ${partiteArbitrate}" class="page-match-item">
+						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date done-date"></span>
+						<a th:href="@{'/partite/' + ${p.id}}" class="match-link">
+							<span th:text="${p.squadraHome.nome}" class="team-name-inline"></span>
+							<span th:text="${p.goalsHome}" class="score-badge"></span>
+							<span class="vs-divider">-</span>
+							<span th:text="${p.goalsAway}" class="score-badge"></span>
+							<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
+						</a>	
+						<span class="separator-dash">------</span>
+						<a th:href="@{'/tornei/' +  ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
+					</li>
+				</ul>	
+			</div>
 
+		</div>
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
-	
 </html>

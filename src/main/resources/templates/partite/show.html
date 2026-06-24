@@ -2,58 +2,91 @@
 <html>
 	<head>
 		<title>Partita</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	<body>
-		<h1>
-			<span th:text="${partita.squadraHome.nome}">Home</span>
-			<span th:if="${partita.stato.name() == 'SCHEDULED'}">-</span>
-			<span th:if="${partita.stato.name() == 'PLAYED'}" th:text="${partita.goalsHome + ' - ' + partita.goalsAway}"></span>
-			<span th:text="${partita.squadraAway.nome}">Away</span>			
-		</h1>
-		<div>
-			Data e ora:<span th:text="${#temporals.format(partita.dataOra, 'dd/MM/yyyy HH:mm')}"></span>
-		</div>	
-		<div>
-			Luogo: <span th:text="${partita.luogo}"></span>	
-		</div>
-		<div>
-			Arbitro (COD):<a th:href="@{'/arbitri/' + ${arbitro.id}}" th:text="${arbitro.codiceArbitro}"></a>
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
 		</div>
 		
-		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
-			<a th:href="@{'/admin/partite/{id}/addRisultato'(id=${partita.id})}">Aggiungi risultato</a>
-		</div>
-		<span th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
-			<form th:action="@{/admin/partite/{id}/delete(id=${partita.id})}" method="POST">
-			    <button type="submit" class="button-delete">Elimina</button>
-			</form>
-		</span>	
-		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('DEFAULT')}">
-			<h2>Commenti (<span th:text="${nCommenti}"></span>)</h2>
-
-			<div th:each="c : ${partita.commenti}">
-			    
-			    <h3 th:text="${c.titolo}">Titolo del commento</h3>
-			    
-			    <p th:text="${c.descrizione}">Descrizione del commento</p>
-				<span>Scritto da: <strong th:text="${c.utente.nome} + ' ' + ${c.utente.cognome}">Nome Cognome</strong></span>
-			    
-			    
-			    <span>
-			        <a th:href="@{'/utenti/commenti/' + ${c.id} + '/edit'}">Modifica</a>
-			    </span>
-			    
-			    <hr> 
+		<div class="list-container view-container">
+			<div class="torneo-header">
+				<h1>
+					<span th:text="${partita.squadraHome.nome}" class="team-name-inline">Home</span>
+					<span th:if="${partita.stato.name() == 'SCHEDULED'}" class="vs-divider">-</span>
+					<span th:if="${partita.stato.name() == 'PLAYED'}" th:text="${partita.goalsHome + ' - ' + partita.goalsAway}" class="score-badge-text"></span>
+					<span th:text="${partita.squadraAway.nome}" class="team-name-inline">Away</span>			
+				</h1>
 			</div>
 
-			<br>
+			<div class="info-card">
+				<div class="info-row">
+					<strong>Data e ora:</strong> <span th:text="${#temporals.format(partita.dataOra, 'dd/MM/yyyy HH:mm')}"></span>
+				</div>	
+				<div class="info-row">
+					<strong>Luogo:</strong> <span th:text="${partita.luogo}"></span>	
+				</div>
+				<div class="info-row">
+					<strong>Arbitro (COD):</strong> <a th:href="@{'/arbitri/' + ${partita.arbitro.id}}" th:text="${partita.arbitro.codiceArbitro}" class="squadre-count-link"></a>
+				</div>
+			</div>
+			
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}" class="admin-panel team-admin-panel">
+				<a th:href="@{'/admin/partite/{id}/addRisultato'(id=${partita.id})}" class="button btn-action">Aggiungi risultato</a>
+				
+				<form th:action="@{/admin/partite/{id}/delete(id=${partita.id})}" method="POST" class="delete-form">
+					<button type="submit" class="btn-delete">Elimina</button>
+				</form>
+			</div>
+			
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('DEFAULT')}" class="partite-section">
+				<h2 class="section-title">Commenti (<span th:text="${nCommenti}"></span>)</h2>
 
-			<div>
-			    <a th:href="@{'/utenti/partite/{id}/commenti/new'(id=${partita.id})}">Aggiungi commento</a>
+				<div th:each="c : ${partita.commenti}" class="desc-box">
+					<h2 class="player-link comment-header">
+					    <span th:text="${c.titolo}">Titolo del commento</span>
+					    <span class="comment-author-inline">
+					        -  <strong th:text="${c.utente.nome} + ' ' + ${c.utente.cognome}">Nome Cognome</strong>
+					    </span>
+					</h2>
+
+					<p th:text="${c.descrizione}" class="desc-text">Descrizione del commento</p>
+					
+					<div style="margin-top: 10px;">
+						<a th:href="@{'/utenti/commenti/' + ${c.id} + '/edit'}" class="squadre-count-link">Modifica</a>
+					</div>
+					
+					<hr style="border: 0; border-top: 1px solid #e2e8f0; margin-top: 15px;"> 
+				</div>
+
+				<br>
+
+				<div style="text-align: center; margin-top: 20px;">
+					<a th:href="@{'/utenti/partite/{id}/commenti/new'(id=${partita.id})}" class="button btn-edit">Aggiungi commento</a>
+				</div>
 			</div>
 		</div>
-
-
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
-	
 </html>

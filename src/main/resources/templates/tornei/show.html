@@ -1,92 +1,123 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Torneo</title>
-	</head>
-	
-	<body>
-		<h1 th:text="${torneo.nome}">Nome Torneo</h1>
-		<div>
-			<div>
-				Anno: <span th:text="${torneo.anno}"></span>
-			</div>
-			<div>
-				<span>Squadre Partecipanti:</span>
-				<span th:if="${numSquadre != 0}">
-				<a th:href="@{'/tornei/' + ${torneo.id} + '/squadre'}" th:text="${numSquadre}"></a>
-				</span>
-				<span th:unless="${numSquadre != 0}">
-					<span th:text="${numSquadre}"></span>
-				</span>
-			</div>
-			<div>
-				Descrizione:
-				<div th:text="${torneo.descrizione}"></div>
-			</div>
-			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
-				<a th:href="@{'/admin/tornei/' + ${torneo.id} + '/squadre/add'}">Iscrivi Squadra</a>
-			</div>
-			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
-				<a th:href="@{'/admin/tornei/{id}/partite/new'(id=${torneo.id})}"> Aggiungi partita</a>
-			</div>
-			<div>
-			    Partite Programmate:
-				<ul>
-				    <li th:each="p : ${partiteProg}">
-						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
-						<a th:href="@{'/partite/' + ${p.id}}">
-							<span th:text="${p.squadraHome.nome}"></span>
-							<span>-</span>
-							<span th:text="${p.squadraAway.nome}"></span>
-						</a>
-				    </li>
-				</ul>
-				Partite Giocate:	
-				<ul>
-				    <li th:each="p : ${partiteGiocate}">
-						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
-						<a th:href="@{'/partite/' + ${p.id}}">
-							<span th:text="${p.squadraHome.nome}"></span>
-							<span th:text="${p.goalsHome}"></span>
-							<span>-</span>
-							<span th:text="${p.goalsAway}"></span>
-							<span th:text="${p.squadraAway.nome}"></span>
-						</a>	
-				    </li>
-				</ul>				
-			</div>
-			
-		</div>
-		<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}">
-			<a th:href="@{'/admin/tornei/{id}/edit'(id=${torneo.id})}">Modifica Torneo</a>
-		</div>
-		
-		<h2>Classifica</h2>
-		<table border="1">
-		    <thead>
-		        <tr>
-		            <th>Squadra</th>
-		            <th>Giocate</th>
-		            <th>Vinte</th>
-		            <th>Pareggiate</th>
-		            <th>Perse</th>
-		            <th>Punti</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr th:each="entry : ${classifica}">
-		            <td th:text="${entry.key.nome}">Nome Squadra</td>
-		            
-		            <td th:text="${entry.value.giocate}">0</td>
-		            <td th:text="${entry.value.vinte}">0</td>
-		            <td th:text="${entry.value.pareggiate}">0</td>
-		            <td th:text="${entry.value.perse}">0</td>
-		            <td th:text="${entry.value.punti}">0</td>
-		        </tr>
-		    </tbody>
-		</table>
+<head>
+    <title>Dettaglio Torneo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="nav">
+	    <div class="nav-logo-section">
+	        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+	        
+			<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+			            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+			        </span>
+			        
+			        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+			            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+			                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+			            </form>
+			        </span>
+	    </div>
+	    
+	    <div>
+	        <a th:href="@{/tornei}">Tornei</a>
+	        <a th:href="@{/giocatori}">Giocatori</a>
+	        <a th:href="@{/squadre}">Squadre</a>
+	        <a th:href="@{/partite}">Calendario</a>
+	    </div>
+	</div>
 
+    <div class="list-container view-container">
+        
+        <div class="torneo-header">
+            <h1 th:text="${torneo.nome}">Nome Torneo</h1>
+            <div class="torneo-badge">
+                Anno: <span th:text="${torneo.anno}"></span>
+            </div>
+        </div>
 
-	</body>
-	
+        <div class="info-card">
+            <div class="info-row">
+                <strong>Squadre Partecipanti:</strong>
+                <span th:if="${numSquadre != 0}">
+                    <a th:href="@{'/tornei/' + ${torneo.id} + '/squadre'}" th:text="${numSquadre}" class="squadre-count-link"></a>
+                </span>
+                <span th:unless="${numSquadre != 0}">
+                    <span th:text="${numSquadre}"></span>
+                </span>
+            </div>
+            
+            <div class="info-row desc-box">
+                <strong>Descrizione:</strong>
+                <div th:text="${torneo.descrizione}" class="desc-text"></div>
+            </div>
+        </div>
+
+        <div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}" class="admin-panel">
+            <a th:href="@{'/admin/tornei/' + ${torneo.id} + '/squadre/add'}" class="button btn-action">Iscrivi Squadra</a>
+            <a th:href="@{'/admin/tornei/{id}/partite/new'(id=${torneo.id})}" class="button btn-action">Aggiungi partita</a>
+            <a th:href="@{'/admin/tornei/{id}/edit'(id=${torneo.id})}" class="button btn-edit">Modifica Torneo</a>
+        </div>
+
+        <div class="partite-section">
+            <h2 class="section-title">📅 Partite Programmate</h2>
+            <ul class="match-list">
+                <li th:each="p : ${partiteProg}" class="match-item">
+                    <span class="match-date" th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+                    <a th:href="@{'/partite/' + ${p.id}}" class="match-link">
+                        <span th:text="${p.squadraHome.nome}"></span>
+                        <span class="vs-divider">-</span>
+                        <span th:text="${p.squadraAway.nome}"></span>
+                    </a>
+                </li>
+            </ul>
+
+            <h2 class="section-title">⚽ Partite Giocate</h2>
+            <ul class="match-list">
+                <li th:each="p : ${partiteGiocate}" class="match-item result-item">
+                    <span class="match-date done-date" th:text="${#temporals.format(p.dataOra, 'dd/MM')}"></span>
+                    <a th:href="@{'/partite/' + ${p.id}}" class="match-link">
+                        <span th:text="${p.squadraHome.nome}"></span>
+                        <span class="score-badge" th:text="${p.goalsHome}"></span>
+                        <span class="vs-divider">-</span>
+                        <span class="score-badge" th:text="${p.goalsAway}"></span>
+                        <span th:text="${p.squadraAway.nome}"></span>
+                    </a>    
+                </li>
+            </ul>               
+        </div>
+        
+        <div class="classifica-section">
+            <h2 class="section-title">🏆 Classifica Torneo</h2>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Squadra</th>
+                        <th>Giocate</th>
+                        <th>Vinte</th>
+                        <th>Pareggiate</th>
+                        <th>Perse</th>
+                        <th>Punti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry : ${classifica}">
+                        <td th:text="${entry.key.nome}" class="team-name">Nome Squadra</td>
+                        <td th:text="${entry.value.giocate}">0</td>
+                        <td th:text="${entry.value.vinte}">0</td>
+                        <td th:text="${entry.value.pareggiate}">0</td>
+                        <td th:text="${entry.value.perse}">0</td>
+                        <td th:text="${entry.value.punti}" class="points-cell">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+	<footer>
+	    Progetto SIW - Sistema gestione tornei calcio
+	</footer>
+
+</body>
 </html>

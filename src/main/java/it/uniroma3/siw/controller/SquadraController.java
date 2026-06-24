@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class SquadraController {
 	@GetMapping("/squadre/{id}")
 	public String show(@PathVariable ("id") Long id,Model model) {
 		Squadra s = this.squadraService.findById(id);
-		List<Giocatore> giocatori = s.getGiocatori();
+		List<Giocatore> giocatori = new ArrayList<>(s.getGiocatori());
 		giocatori.sort(Comparator.comparing(Giocatore::getRuolo));
 		model.addAttribute("squadra", s);
 		model.addAttribute("giocatori", giocatori);

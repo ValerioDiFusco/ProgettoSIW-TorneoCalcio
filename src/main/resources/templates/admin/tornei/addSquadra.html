@@ -2,20 +2,55 @@
 <html>
 	<head>
 		<title>AddSquadra</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	
 	<body>
-		<h1>Aggiungi squadra al Torneo</h1>
-		<form th:method="POST" th:action="@{/admin/tornei/{id}/squadre(id=${torneo.id})}">
-			<div th:each="s : ${squadre}">
-				<input type="checkbox" name="squadreId" th:value="${s.id}">
-				<span th:text="${s.nome}">Nome Squadra</span>
-			</div>
-			<div>
-				<button type="submit">Conferma</button>
-			</div>
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
+		</div>
+		<div class="list-container view-container form-container">
 			
-		</form>
+			<div class="torneo-header">
+				<h1>Aggiungi squadra al Torneo</h1>
+			</div>
+
+			<form th:method="POST" th:action="@{/admin/tornei/{id}/squadre(id=${torneo.id})}" class="custom-form">
+				
+				<div class="form-group checkbox-list-group">
+					<div th:each="s : ${squadre}" class="checkbox-item-row">
+						<input type="checkbox" name="squadreId" th:value="${s.id}" class="custom-checkbox">
+						<span th:text="${s.nome}" class="team-name-inline checkbox-label-text">Nome Squadra</span>
+					</div>
+				</div>
+
+				<div class="form-submit-block">
+					<button type="submit" class="button admin-btn form-btn">Conferma</button>
+				</div>
+				
+			</form>
+		</div>
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
-	
 </html>

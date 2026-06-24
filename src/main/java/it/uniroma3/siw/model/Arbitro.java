@@ -16,7 +16,6 @@ import jakarta.persistence.UniqueConstraint;
 
 
 @Entity
-// non favvio uniqueConstraint perchè nel codiceArbitro ho messo unique
 public class Arbitro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

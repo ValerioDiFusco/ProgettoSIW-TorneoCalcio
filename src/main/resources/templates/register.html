@@ -3,42 +3,46 @@
     <title>Registrazione</title>
     <link rel="stylesheet" th:href="@{/css/style.css?v=9}">
 </head>
-<body class="login-page"> <div class="login-container"> <h1>Registrati</h1>
+<body class="login-page"> 
+<div class="login-container view-container form-container"> 
+    <div class="torneo-header">
+        <h1>Registrati</h1>
+    </div>
     
-    <form th:action="@{/register}" th:method="POST" th:object="${credenziali}" class="login-form">
+    <form th:action="@{/register}" th:method="POST" th:object="${credenziali}" class="custom-form login-form">
         
         <div class="form-group">
-            <label>Nome:</label>
-            <input type="text" name="nome" th:value="${utente.nome}" required />
-            <p th:if="${#fields.hasErrors('utente.nome')}" th:errors="${utente.nome}" class="error-message-inline"></p>
+            <label class="form-label">Nome:</label>
+            <input type="text" name="nome" th:value="${utente.nome}" class="search-input form-input" placeholder="es: Mario" required />
+            <p th:if="${#fields.hasErrors('utente.nome')}" th:errors="${utente.nome}" class="error-message-inline error-message"></p>
         </div>
         
         <div class="form-group">
-            <label>Cognome:</label>
-            <input type="text" name="cognome" th:value="${utente.cognome}" required />
-            <p th:if="${#fields.hasErrors('utente.cognome')}" th:errors="${utente.cognome}" class="error-message-inline"></p>
+            <label class="form-label">Cognome:</label>
+            <input type="text" name="cognome" th:value="${utente.cognome}" class="search-input form-input" placeholder="es: Rossi" required />
+            <p th:if="${#fields.hasErrors('utente.cognome')}" th:errors="${utente.cognome}" class="error-message-inline error-message"></p>
         </div>
         
         <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" th:value="${utente.email}" required />
-            <p th:if="${#fields.hasErrors('utente.email')}" th:errors="${utente.email}" class="error-message-inline"></p>
+            <label class="form-label">Email:</label>
+            <input type="email" name="email" th:value="${utente.email}" class="search-input form-input" placeholder="es: mario.rossi@example.com" required />
+            <p th:if="${#fields.hasErrors('utente.email')}" th:errors="${utente.email}" class="error-message-inline error-message"></p>
         </div>
         
         <div class="form-group">
-            <label>Username:</label>
-            <input type="text" th:field="*{username}" required />
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message-inline"></p>
+            <label class="form-label">Username:</label>
+            <input type="text" th:field="*{username}" class="search-input form-input" placeholder="Scegli uno username" required />
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message-inline error-message"></p>
         </div>
         
         <div class="form-group">
-            <label>Password:</label>
-            <input type="password" th:field="*{password}" required />
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message-inline"></p>
+            <label class="form-label">Password:</label>
+            <input type="password" th:field="*{password}" class="search-input form-input" placeholder="Crea una password" required />
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message-inline error-message"></p>
         </div>
         
-        <div class="form-actions">
-            <button type="submit" class="btn-submit">Registrati</button>
+        <div class="form-actions form-submit-block">
+            <button type="submit" class="button admin-btn form-btn btn-submit">Registrati</button>
         </div>
     </form>
 </div>

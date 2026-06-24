@@ -2,33 +2,73 @@
 <html>
 	<head>
 		<title>Torneo</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	
 	<body>
-		<h1 th:text="${torneo.id != null} ? 'Modifica Torneo' : 'Aggiungi Torneo'">Aggiungi Torneo</h1>
-		<form th:method="POST" 
-		          th:action="${torneo.id != null} ? @{/admin/tornei/{id}(id=${torneo.id})} : @{/admin/tornei}" 
-		          th:object="${torneo}">
-			<div th:if="${#fields.hasGlobalErrors()}">
-				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
+		</div>
+		
+		<div class="list-container view-container form-container">
+			
+			<div class="torneo-header">
+				<h1 th:text="${torneo.id != null} ? 'Modifica Torneo' : 'Aggiungi Torneo'">Aggiungi Torneo</h1>
 			</div>
-			<div>
-				Nome: <span><input type="text" th:field="${torneo.nome}"></span>
-				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-			</div>
-			<div>
-				Anno:<span><input type="text" th:field="${torneo.anno}"></span>
-				<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
-			</div>
-			<div>
-				Descrizione:<span><input type="text" th:field="${torneo.descrizione}"></span>
-				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
-			</div>
-			<div>
-				<span><button type="submit">Conferma</span>
-			</div>
-		</form>
 
+			<form th:method="POST" 
+			          th:action="${torneo.id != null} ? @{/admin/tornei/{id}(id=${torneo.id})} : @{/admin/tornei}" 
+			          th:object="${torneo}" 
+			          class="custom-form">
+				
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err:${#fields.globalErrors()}" th:text="${err}" class="error-global"></p>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Nome:</label>
+					<span><input type="text" th:field="${torneo.nome}" class="search-input form-input" placeholder="es: Torneo Estivo"></span>
+					<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Anno:</label>
+					<span><input type="text" th:field="${torneo.anno}" class="search-input form-input" placeholder="es: 2026"></span>
+					<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Descrizione:</label>
+					<span><input type="text" th:field="${torneo.descrizione}" class="search-input form-input" placeholder="es: Campionato di calcio a 5"></span>
+					<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="error-message"></span>
+				</div>
+				
+				<div class="form-submit-block">
+					<span><button type="submit" class="button admin-btn form-btn">Conferma</button></span>
+				</div>
+			</form>
+		</div>
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
-	
 </html>

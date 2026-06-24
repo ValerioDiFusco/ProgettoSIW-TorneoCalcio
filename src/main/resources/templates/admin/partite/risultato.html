@@ -2,28 +2,69 @@
 <html>
 	<head>
 		<title>Result</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	
 	<body>
-		<h1>Inserisci risultato</h1>
-		<form th:method="POST" th:object="${partita}" th:action="@{'/admin/partite/' + ${partita.id} + '/risultato'}">
-			<input type="hidden" th:field="*{id}" />
-			<div th:if="${#fields.hasGlobalErrors()}"> 
-				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+		
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
+		</div>
+		
+		<div class="list-container view-container form-container">
+			<div class="torneo-header">
+				<h1>Inserisci risultato</h1>
 			</div>
-			<div>
-				<span th:text="${partita.squadraHome.nome}"></span>
-				<input type="text" th:field="*{goalsHome}">
-				<span th:if="${#fields.hasErrors('goalsHome')}" th:errors="*{goalsHome}">	</span>
-				
-				<input type="text" th:field="*{goalsAway}">
-				<span th:if="${#fields.hasErrors('goalsAway')}" th:errors="*{goalsAway}">	</span>
-				<span th:text="${partita.squadraAway.nome}"></span>
-				
-			</div>
-			<div>
-				<button type="submit">Salva Risultato</button>
-			</div>
-		</form>
+			
+			<form th:method="POST" th:object="${partita}" th:action="@{'/admin/partite/' + ${partita.id} + '/risultato'}" class="custom-form">
+				<input type="hidden" th:field="*{id}" />
+				<div th:if="${#fields.hasGlobalErrors()}"> 
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error-global"></p>
+				</div>
+				<div class="form-group row-score-inputs">
+					<span th:text="${partita.squadraHome.nome}" class="team-name-inline team-home-align"></span>
+					
+					<div class="score-input-wrapper">
+						<input type="text" th:field="*{goalsHome}" class="search-input form-input score-field-center" placeholder="0">
+						<span th:if="${#fields.hasErrors('goalsHome')}" th:errors="*{goalsHome}" class="error-message error-small">	</span>
+					</div>
+					
+					<span class="vs-divider size-large">-</span>
+					
+					<div class="score-input-wrapper">
+						<input type="text" th:field="*{goalsAway}" class="search-input form-input score-field-center" placeholder="0">
+						<span th:if="${#fields.hasErrors('goalsAway')}" th:errors="*{goalsAway}" class="error-message error-small">	</span>
+					</div>
+					
+					<span th:text="${partita.squadraAway.nome}" class="team-name-inline team-away-align"></span>
+					
+				</div>
+				<div class="form-submit-block">
+					<button type="submit" class="button admin-btn form-btn">Salva Risultato</button>
+				</div>
+			</form>
+		</div>
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
 </html>

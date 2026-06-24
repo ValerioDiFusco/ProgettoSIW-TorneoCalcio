@@ -2,49 +2,94 @@
 <html>
 	<head>
 		<title>Partita</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	
 	<body>
-		<h1> Registrazione Partita</h1>
-		<form th:method="POST" th:action="@{/admin/tornei/{id}/partite(id=${torneo.id})}" th:object="${partita}">
-			<div th:if="${#fields.hasGlobalErrors()}">
-				<p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+		
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+		    </div>
+		</div>
+		
+		<div class="list-container view-container form-container">
+			
+			<div class="torneo-header">
+				<h1>Registrazione Partita</h1>
 			</div>
-			<div>
-				Squadra Home:<select th:field="*{squadraHome}">
-					<option value="">--Seleziona SquadraHome--</option>
-					<option th:each="s : ${squadre}" th:value="${s.id}" th:text="${s.nome}"></option>
-				</select>
-				<span th:if="${#fields.hasErrors('squadraHome')}" th:errors="*{squadraHome}"></span>
-			</div>
-			<div>
-				Squadra Away:<select th:field="*{squadraAway}">
-					<option value="">--Seleziona SquadraAway--</option>
-					<option th:each="s : ${squadre}" th:value="${s.id}" th:text="${s.nome}"></option>
-				</select>
-				<span th:if="${#fields.hasErrors('squadraAway')}" th:errors="*{squadraAway}"></span>
-			</div>
-			<div>
-				Data e Ora:<span><input type="datetime-local" th:field="${partita.dataOra}"></span>
-				<span th:if="${#fields.hasErrors('dataOra')}" th:errors="*{dataOra}"></span>	
-			</div>
-			<div>
-				Luogo:<span><input type="text" th:field="${partita.luogo}"></span>
-				<span th:if="${#fields.hasErrors('luogo')}" th:errors="*{luogo}"></span>	
-			</div>
-			<div>
-			    Arbitro:<select th:field="*{arbitro}">
-			        <option value="">-- Seleziona arbitro --</option>
-			        <option th:each="a : ${arbitri}" th:value="${a.id}" th:text="${a.nome + ' ' + a.cognome}">
-			        </option>
-			    </select>
-				<span th:if="${#fields.hasErrors('arbitro')}" th:errors="*{arbitro}"></span>
-			</div>
-			<div>
-				<span><button type="submit">Conferma</button></span>
-			</div>
-		</form>
 
+			<form th:method="POST" th:action="@{/admin/tornei/{id}/partite(id=${torneo.id})}" th:object="${partita}" class="custom-form">
+				
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err:${#fields.globalErrors()}" th:text="${err}" class="error-global"></p>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Squadra Home:</label>
+					<select th:field="*{squadraHome}" class="search-input form-input form-select">
+						<option value="">--Seleziona SquadraHome--</option>
+						<option th:each="s : ${squadre}" th:value="${s.id}" th:text="${s.nome}"></option>
+					</select>
+					<span th:if="${#fields.hasErrors('squadraHome')}" th:errors="*{squadraHome}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Squadra Away:</label>
+					<select th:field="*{squadraAway}" class="search-input form-input form-select">
+						<option value="">--Seleziona SquadraAway--</option>
+						<option th:each="s : ${squadre}" th:value="${s.id}" th:text="${s.nome}"></option>
+					</select>
+					<span th:if="${#fields.hasErrors('squadraAway')}" th:errors="*{squadraAway}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Data e Ora:</label>
+					<span><input type="datetime-local" th:field="${partita.dataOra}" class="search-input form-input"></span>
+					<span th:if="${#fields.hasErrors('dataOra')}" th:errors="*{dataOra}" class="error-message"></span>	
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Luogo:</label>
+					<span><input type="text" th:field="${partita.luogo}" class="search-input form-input" placeholder="es: Stadio Comunale"></span>
+					<span th:if="${#fields.hasErrors('luogo')}" th:errors="*{luogo}" class="error-message"></span>	
+				</div>
+				
+				<div class="form-group">
+				    <label class="form-label">Arbitro:</label>
+				    <select th:field="*{arbitro}" class="search-input form-input form-select">
+				        <option value="">-- Seleziona arbitro --</option>
+				        <option th:each="a : ${arbitri}" th:value="${a.id}" th:text="${a.nome + ' ' + a.cognome}">
+				        </option>
+				    </select>
+					<span th:if="${#fields.hasErrors('arbitro')}" th:errors="*{arbitro}" class="error-message"></span>
+				</div>
+				
+				<div class="form-submit-block">
+					<span><button type="submit" class="button admin-btn form-btn">Conferma</button></span>
+				</div>
+			</form>
+		</div>
+		
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	</body>
-	
 </html>
