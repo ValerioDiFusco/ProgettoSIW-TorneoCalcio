@@ -104,10 +104,16 @@ public class GiocatoreController {
 			model.addAttribute("squadre", this.squadraService.findAll());
 			return "admin/giocatori/form";
 		}
-		else {
+		try {
 			giocatore.setId(id);
-			this.giocatoreService.update(giocatore);
+			this.giocatoreService.save(giocatore);
 			return "redirect:/giocatori/" + id;
+		}
+		catch(DuplicateGiocatoreException e) {
+			bindingResult.reject("giocatore.duplicate");
+			model.addAttribute("ruoli", Ruolo.values());
+			return "admin/giocatori/form";
+			
 		}
 	}
 

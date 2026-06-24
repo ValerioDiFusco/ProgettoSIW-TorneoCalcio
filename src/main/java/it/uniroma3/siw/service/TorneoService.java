@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.exception.DuplicateTorneoException;
 import it.uniroma3.siw.exception.TorneoNotFoundException;
@@ -18,7 +19,7 @@ import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.model.Stato;
 import it.uniroma3.siw.model.Torneo;
 import it.uniroma3.siw.repository.TorneoRepository;
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class TorneoService {
@@ -29,14 +30,17 @@ public class TorneoService {
 		this.torneoRepository = torneoRepository;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Torneo> getAllTornei(){
 		return (List<Torneo>) this.torneoRepository.findAll();
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Torneo> filtraListaByNome(String nome){
 		return (List<Torneo>) this.torneoRepository.findByNomeContainingIgnoreCase(nome);
 	}
 	
+	@Transactional(readOnly = true)
 	public Torneo findById(Long id) {
 		Optional<Torneo> optionalTorneo = this.torneoRepository.findById(id);
 		if(optionalTorneo.isPresent()) {
@@ -60,6 +64,7 @@ public class TorneoService {
 		return this.torneoRepository.save(torneo);
 	}
 	
+	@Transactional(readOnly = true)
 	public Map<Squadra,Classifica> aggiornaClassifica(Torneo torneo) {
 		Map<Squadra,Classifica> classifica = new  HashMap<>();
 		

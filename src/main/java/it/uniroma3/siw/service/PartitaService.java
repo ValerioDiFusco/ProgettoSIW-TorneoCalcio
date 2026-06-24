@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.exception.PartitaNotFoundException;
 import it.uniroma3.siw.model.Arbitro;
@@ -20,7 +21,8 @@ public class PartitaService {
 	public PartitaService(PartitaRepository partitaRepository) {
 		this.partitaRepository = partitaRepository;
 	}
-	
+
+	@Transactional(readOnly = true)
 	public Partita findById(Long id) {
 		Optional<Partita> optionalPartita = this.partitaRepository.findById(id);
 		if(optionalPartita.isPresent()) {
@@ -31,29 +33,37 @@ public class PartitaService {
 		}
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Partita> findGiocateByTorneo(Torneo torneo){
 		return this.partitaRepository.findByTorneoAndStato(torneo, Stato.PLAYED);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Partita> findProgrammateByTorneo(Torneo torneo){
 		return this.partitaRepository.findByTorneoAndStato(torneo, Stato.SCHEDULED);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Partita> findArbitrate(Arbitro arbitro){
 		return this.partitaRepository.findByArbitroAndStato(arbitro, Stato.PLAYED);
 	}
+	
+	@Transactional(readOnly = true)
 	public List<Partita> findDaArbitrare(Arbitro arbitro){
 		return this.partitaRepository.findByArbitroAndStato(arbitro, Stato.SCHEDULED);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Partita> findAll(){
 		return (List<Partita>) this.partitaRepository.findAllByOrderByStatoAscDataOraAsc();
 	}
 	
+	@Transactional
 	public Partita save(Partita partita) {
 		return this.partitaRepository.save(partita);
 	}
 	
+	@Transactional
 	public void delete(Long id) {
 		this.partitaRepository.deleteById(id);
 	}

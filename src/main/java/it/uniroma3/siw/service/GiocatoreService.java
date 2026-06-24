@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.exception.DuplicateGiocatoreException;
 import it.uniroma3.siw.exception.GiocatoreNotFoundException;
 import it.uniroma3.siw.model.Giocatore;
 import it.uniroma3.siw.repository.GiocatoreRepository;
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class GiocatoreService {
@@ -20,17 +21,22 @@ public class GiocatoreService {
 		this.giocatoreRepository = giocatoreRepository;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Giocatore> findAllByOrderByCognomeAsc(){
 		return this.giocatoreRepository.findAllByOrderByCognomeAsc();
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Giocatore> searchByNomeOrCognome(String parola){
 		return this.giocatoreRepository.findByNomeContainingIgnoreCaseOrCognomeContainingIgnoreCase(parola, parola);
 	}
+	
+	@Transactional(readOnly = true)
 	public List<Giocatore> searchByNomeAndCognome(String nome,String cognome) {
 		return this.giocatoreRepository.findByNomeContainingIgnoreCaseAndCognomeContainingIgnoreCase(nome, cognome);
 	}
 	
+	@Transactional(readOnly = true)
 	public Giocatore findById(Long id) {
 		Optional<Giocatore> optionalGiocatore = this.giocatoreRepository.findById(id);
 		if(optionalGiocatore.isPresent()) {
@@ -49,9 +55,5 @@ public class GiocatoreService {
 		return this.giocatoreRepository.save(giocatore);
 	}
 	
-	@Transactional
-	public Giocatore update(Giocatore giocatore) {
-		return this.giocatoreRepository.save(giocatore);
-	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.exception.ArbitroNotFoundException;
 import it.uniroma3.siw.model.Arbitro;
@@ -18,6 +19,7 @@ public class ArbitroService {
 		this.arbitroRepository = arbitroRepository;
 	}
 	
+	@Transactional(readOnly = true)
 	public Arbitro findById(Long id) {
 		Optional<Arbitro> optionalArbitro = this.arbitroRepository.findById(id);
 		if(optionalArbitro.isPresent()) {
@@ -28,6 +30,7 @@ public class ArbitroService {
 		}
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Arbitro> findAll(){
 		return (List<Arbitro>) this.arbitroRepository.findAll();
 	}

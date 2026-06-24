@@ -121,10 +121,14 @@ public class TorneoController {
 		if(bindingResult.hasErrors()) {
 			return "admin/tornei/form";
 		}
-		else {
+		try {
 			torneo.setId(id);
-			this.torneoService.update(torneo);
+			this.torneoService.save(torneo);
 			return "redirect:/tornei/" + id;
+		}
+		catch (DuplicateTorneoException e) {
+			bindingResult.reject("torneo.duplicate");
+			return "admin/tornei/form";
 		}
 	}
 }
