@@ -2,6 +2,7 @@ package it.uniroma3.siw.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.siw.model.Arbitro;
@@ -15,5 +16,6 @@ public interface PartitaRepository extends CrudRepository<Partita,Long>{
 	
 	public List<Partita> findByArbitroAndStato(Arbitro arbitro,Stato stato);
 	
+	@EntityGraph(attributePaths = {"arbitro", "torneo", "squadraHome", "squadraAway"})
 	public List<Partita> findAllByOrderByStatoAscDataOraAsc();
 }
