@@ -38,17 +38,15 @@ public class GiocatoreController {
 			giocatori = this.giocatoreService.searchByNomeAndCognome(nome,cognome);
 		}
 		else if(nome != null && !nome.isBlank()){
-			giocatori = this.giocatoreService.searchByNomeOrCognome(nome);
+			giocatori = this.giocatoreService.searchByNome(nome);
 		}
 		else if(cognome != null && !cognome.isBlank()){
-			giocatori = this.giocatoreService.searchByNomeOrCognome(cognome);
+			giocatori = this.giocatoreService.searchByCognome(cognome);
 		}
 		else {
 			giocatori = this.giocatoreService.findAllByOrderByCognomeAsc();
 		}
-		Integer numGiocatori = giocatori.size();
 		model.addAttribute("giocatori", giocatori);
-		model.addAttribute("numGio", numGiocatori);
 		return "giocatori/list";
 	}
 	

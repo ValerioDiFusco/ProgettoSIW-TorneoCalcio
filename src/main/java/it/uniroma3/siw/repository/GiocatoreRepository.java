@@ -13,7 +13,13 @@ public interface GiocatoreRepository extends CrudRepository<Giocatore,Long>{
 	@EntityGraph(attributePaths ={"squadra"})
 	public List<Giocatore> findAllByOrderByCognomeAsc();
 	
-	public List<Giocatore> findByNomeContainingIgnoreCaseOrCognomeContainingIgnoreCase(String nome, String cognome);
+	@EntityGraph(attributePaths = {"squadra"})
+    public List<Giocatore> findByNomeContainingIgnoreCase(String nome);
+	
+	@EntityGraph(attributePaths = {"squadra"})
+	public List<Giocatore> findByCognomeContainingIgnoreCase(String cognome);
+	
+	@EntityGraph(attributePaths ={"squadra"})
 	public List<Giocatore> findByNomeContainingIgnoreCaseAndCognomeContainingIgnoreCase(String nome,String cognome);
 	
 	public boolean existsByCodiceFiscaleIgnoreCase(String codiceFiscale);

@@ -27,8 +27,13 @@ public class GiocatoreService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Giocatore> searchByNomeOrCognome(String parola){
-		return this.giocatoreRepository.findByNomeContainingIgnoreCaseOrCognomeContainingIgnoreCase(parola, parola);
+	public List<Giocatore> searchByNome(String nome){
+		return this.giocatoreRepository.findByNomeContainingIgnoreCase(nome);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Giocatore> searchByCognome(String cognome){
+		return this.giocatoreRepository.findByCognomeContainingIgnoreCase(cognome);
 	}
 	
 	@Transactional(readOnly = true)

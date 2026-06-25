@@ -22,10 +22,6 @@ public class SquadraService {
 		this.squadraRepository = squadraRepository;
 	}
 	
-	@Transactional(readOnly = true)
-	public Long countByTornei(Torneo t){
-		return this.squadraRepository.countByTornei(t);
-	}
 	
 	@Transactional(readOnly = true)
 	public Squadra findById(Long id) {
@@ -51,6 +47,11 @@ public class SquadraService {
 	@Transactional(readOnly = true)
 	public List<Squadra> findByTorneiId(Long id){
 		return this.squadraRepository.findByTorneiId(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Squadra> findByTorneiNotContaining(Torneo torneo){
+		return this.squadraRepository.findByTorneiNotContaining(torneo);
 	}
 	
 	@Transactional

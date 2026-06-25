@@ -14,6 +14,7 @@ public interface PartitaRepository extends CrudRepository<Partita,Long>{
 	
 	public List<Partita> findByTorneoAndStato(Torneo torneo, Stato stato);
 	
+	@EntityGraph(attributePaths = {"squadraHome", "squadraAway", "torneo"})
 	public List<Partita> findByArbitroAndStato(Arbitro arbitro,Stato stato);
 	
 	@EntityGraph(attributePaths = {"arbitro", "torneo", "squadraHome", "squadraAway"})

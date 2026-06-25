@@ -187,7 +187,7 @@ footer {
 }
 
 .search-button {
-    background-color: #2563eb; /* Coerente con la Nav */
+    background-color: #22c55e; /* Coerente con la Nav */
     color: white;
     border: none;
     padding: 0 24px;
@@ -199,7 +199,7 @@ footer {
 }
 
 .search-button:hover {
-    background-color: #1d4ed8;
+    background-color: #22c55e;
     transform: translateY(-1px);
 }
 

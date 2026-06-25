@@ -50,7 +50,7 @@ public class TorneoController {
 	public String show(@PathVariable("id") Long id, Model model) {
 		Torneo t = this.torneoService.findById(id);
 		Map<Squadra, Classifica> mappaClassifica = this.torneoService.aggiornaClassifica(t);
-		model.addAttribute("numSquadre", t.getSquadre().size());
+		model.addAttribute("numSquadre", mappaClassifica.size());
 		model.addAttribute("torneo", t);
 		model.addAttribute("partiteGiocate", this.partitaService.findGiocateByTorneo(t));
 		model.addAttribute("partiteProg", this.partitaService.findProgrammateByTorneo(t));
@@ -69,12 +69,13 @@ public class TorneoController {
 	@GetMapping("/admin/tornei/{id}/squadre/add")
 	public String addSquadra(@PathVariable("id") Long id,Model model) {
 		Torneo t = this.torneoService.findById(id);
-		List<Squadra> allSquadre = this.squadraService.findAll();
-		allSquadre.removeAll(t.getSquadre());
+		List<Squadra> squadreDaIscrivere = this.squadraService.findByTorneiNotContaining(t);
 		model.addAttribute("torneo", t);
-		model.addAttribute("squadre", allSquadre);
+		model.addAttribute("squadre", squadreDaIscrivere);
 		return "admin/tornei/addSquadra";
 	}
+	
+	//da rivedere
 	@PostMapping("/admin/tornei/{id}/squadre")
 	public String addSquadra(@PathVariable Long id, @RequestParam List<Long> squadreId) { //metto la lista di Long perchè psso far sicrivere più sqadre
 		Torneo t = this.torneoService.findById(id);
