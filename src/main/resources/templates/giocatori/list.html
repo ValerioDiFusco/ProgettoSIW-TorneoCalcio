@@ -3,41 +3,62 @@
 <head>
 	<title>Lista</title>
 	<link rel="stylesheet" th:href="@{/css/style.css}">
-	<link rel="stylesheet" th:href="@{/css/listaGiocatori.css}">
 	
 </head>
 
 <body>
 	<div class="nav">
-	    <div><strong>⚽ Tornei Calcio</strong></div>
+	    <div class="nav-logo-section">
+	        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+	        
+			<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+			            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+			        </span>
+			        
+			        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+			            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+			                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+			            </form>
+			        </span>
+	    </div>
+	    
 	    <div>
-	        <a href="/tornei">Tornei</a>
-	        <a href="/giocatori">Giocatori</a>
-	        <a href="/squadre">Squadre</a>
+	        <a th:href="@{/tornei}">Tornei</a>
+	        <a th:href="@{/giocatori}">Giocatori</a>
+	        <a th:href="@{/squadre}">Squadre</a>
+	        <a th:href="@{/partite}">Calendario</a>
 	    </div>
 	</div>
 	
-	<div class="header">	
-		<h2>Cerca Giocatore</h2>
-	<form th:method="GET" th:action="@{/giocatori}">
-		<input type="text" name="nome" placeholder="Nome Giocatore">
-		<input type="text" name="cognome" placeholder="Cognome Giocatore">
-		<button type="submit">Conferma</button>
-	</form>
-	</div>
-	
-	<div>
-	<ul class="table">
-		<li th:each="g : ${giocatori}">
-			<a th:href="'/giocatori/' + ${g.id}" th:text="${g.cognome + ' '+ g.nome}"></a>
-			<span th:text="${g.squadra.nome}"></span>
-		</li>
-	</ul>
-	</div>	
-	
-<footer>
-	Progetto SIW - Sistema gestione tornei calcio
-</footer>
+	<div class="header-list">	
+			<h1>Cerca Giocatore</h1>
+			<p>Trova i protagonisti del campionato per nome o cognome</p>
+		</div>
+		
+		<div class="list-container">
+			
+			<form th:method="GET" th:action="@{/giocatori}" class="search-form">
+				<input type="text" name="nome" placeholder="Nome Giocatore" class="search-input">
+				<input type="text" name="cognome" placeholder="Cognome Giocatore" class="search-input">
+				<button type="submit" class="search-button">Conferma</button>
+			</form>
+			
+			<ul class="item-list">
+				<li th:each="g : ${giocatori}" class="item-element">
+					
+					<span class="icon-ball">🏃‍♂️</span>
+					
+					<a th:href="@{/giocatori/{id}(id=${g.id})}" th:text="${g.cognome + ' ' + g.nome}" class="item-link"></a>
+					
+					<span th:text="${g.squadra.nome}" class="player-role"></span>
+				</li>
+			</ul>
+			
+		</div>	
+		
+		<footer>
+			Progetto SIW - Sistema gestione tornei calcio
+		</footer>
 	
 </body>
 	

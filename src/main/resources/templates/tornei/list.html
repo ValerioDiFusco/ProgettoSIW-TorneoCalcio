@@ -6,28 +6,28 @@
 </head>
 <body>
 
-    <div class="nav">
-        <div class="nav-logo-section">
-            <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
-            
-            <span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
-                <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
-            </span>
-            
-            <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center; margin-left: 12px;">
-                <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
-                    <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
-                </form>
-            </span>
-        </div>
-
-        <div>
-            <a th:href="@{/tornei}">Tornei</a>
-            <a th:href="@{/giocatori}">Giocatori</a>
-            <a th:href="@{/squadre}">Squadre</a>
-            <a th:href="@{/calendario}">Calendario</a>
-        </div>
-    </div> <div class="list-container">
+	<div class="nav">
+	    <div class="nav-logo-section">
+	        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+	        
+			<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+			            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+			        </span>
+			        
+			        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+			            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+			                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+			            </form>
+			        </span>
+	    </div>
+	    
+	    <div>
+	        <a th:href="@{/tornei}">Tornei</a>
+	        <a th:href="@{/giocatori}">Giocatori</a>
+	        <a th:href="@{/squadre}">Squadre</a>
+	        <a th:href="@{/partite}">Calendario</a>
+	    </div>
+	</div> <div class="list-container">
         
         <form th:method="GET" th:action="@{/tornei}" class="search-form">
             <input type="text" name="nome" placeholder="Cerca torneo" class="search-input">

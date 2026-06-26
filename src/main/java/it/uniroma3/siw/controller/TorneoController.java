@@ -77,7 +77,10 @@ public class TorneoController {
 	
 	//da rivedere
 	@PostMapping("/admin/tornei/{id}/squadre")
-	public String addSquadra(@PathVariable Long id, @RequestParam List<Long> squadreId) { //metto la lista di Long perchè psso far sicrivere più sqadre
+	public String addSquadra(@PathVariable Long id, @RequestParam(required = false) List<Long> squadreId) { //metto la lista di Long perchè psso far sicrivere più sqadre
+		if(squadreId == null) {
+			return "redirect:/tornei/" + id;
+		}
 		Torneo t = this.torneoService.findById(id);
 		List<Squadra> squadre = this.squadraService.findAllById(squadreId);
 		t.getSquadre().addAll(squadre);
