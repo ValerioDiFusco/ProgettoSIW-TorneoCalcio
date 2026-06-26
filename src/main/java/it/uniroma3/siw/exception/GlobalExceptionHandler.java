@@ -42,4 +42,10 @@ public class GlobalExceptionHandler {
 		model.addAttribute("errorMessage", e.getMessage());
 		return "error/404";
 	}
+	@ExceptionHandler(AccessoVietatoException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	public String handleAccessDenied(AccessoVietatoException e, Model model) {
+		model.addAttribute("errorMessage", "Non hai i permessi necessari per accedere a questa pagina");
+		return "error/403";
+	}
 }
