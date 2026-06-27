@@ -27,7 +27,12 @@
 	        <a th:href="@{/squadre}">Squadre</a>
 	        <a th:href="@{/partite}">Calendario</a>
 	    </div>
-	</div> <div class="list-container">
+	</div>
+	<div class="header-list">
+	    <h1>🏆 Elenco dei Tornei</h1>
+	    <p>Visualizza i dettagli di ogni torneo</p>
+	</div> 
+	<div class="list-container">
         
         <form th:method="GET" th:action="@{/tornei}" class="search-form">
             <input type="text" name="nome" placeholder="Cerca torneo" class="search-input">
