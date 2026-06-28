@@ -1,8 +1,0 @@
-.nav {
-    display: flex; /* elementi sulla stessa riga*/
-    justify-content: space-between;/* spinge un elemento a sinistra e uno a destra*/
-    align-items: center;
-    padding: 15px 20px;
-    background: #2563eb;
-    color: white;
-}

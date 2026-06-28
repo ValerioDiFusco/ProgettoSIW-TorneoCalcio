@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -55,6 +57,7 @@ public class Giocatore {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
+	@JsonIgnore
 	private Squadra squadra;
 	
 	public Giocatore() {

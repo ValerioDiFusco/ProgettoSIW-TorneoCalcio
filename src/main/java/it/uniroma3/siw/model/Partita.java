@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -47,16 +50,20 @@ public class Partita {
 
 	@ManyToOne
 	@NotNull
+	@JsonIgnore
 	private Arbitro arbitro;
 	
 
 	@ManyToOne
+	@JsonIgnoreProperties("squadre")
 	private Torneo torneo;
 
 	@ManyToOne
+	@JsonIgnore
 	private Squadra squadraHome;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Squadra squadraAway;
 	
 	@OneToMany(mappedBy = "partita")

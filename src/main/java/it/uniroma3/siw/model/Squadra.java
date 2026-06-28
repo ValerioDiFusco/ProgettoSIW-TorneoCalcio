@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +47,7 @@ public class Squadra {
 	private List<Giocatore> giocatori = new ArrayList<>();
 	
 	@ManyToMany
+	@JsonIgnore
 	private List<Torneo> tornei = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "squadraHome", cascade = CascadeType.REMOVE)

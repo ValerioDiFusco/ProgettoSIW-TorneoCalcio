@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +40,7 @@ public class Torneo {
 	private String descrizione;
 	
 	@OneToMany(mappedBy = "torneo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE})
+	@JsonIgnore
 	private List<Partita> partite = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "tornei")
