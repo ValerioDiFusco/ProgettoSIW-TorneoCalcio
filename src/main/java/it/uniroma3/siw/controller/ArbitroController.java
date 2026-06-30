@@ -20,7 +20,7 @@ public class ArbitroController {
 		this.partitaService = partitaService;
 	}
 	
-	@GetMapping("arbitri/{id}")
+	@GetMapping("/arbitri/{id}")
 	public String show(@PathVariable("id") Long id, Model model){
 		Arbitro a = this.arbitroService.findById(id);
 		model.addAttribute("arbitro",a);

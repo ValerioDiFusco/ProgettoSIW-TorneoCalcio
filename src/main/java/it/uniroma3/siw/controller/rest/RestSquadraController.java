@@ -54,7 +54,7 @@ public class RestSquadraController {
 			return ResponseEntity.notFound().build();
 		}
 		squadra.setId(id);
-		this.squadraService.save(squadra);
+		this.squadraService.update(squadra);
 		return ResponseEntity.ok(squadra);
 		
 	}

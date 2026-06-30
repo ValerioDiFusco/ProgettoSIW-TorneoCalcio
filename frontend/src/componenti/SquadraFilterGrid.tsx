@@ -21,9 +21,10 @@ type SortOption = "nome-asc" | "nome-desc" | "anno-asc" | "anno-desc";
 interface Props {
   squadre: Squadra[];
   deleteSquadra: (id:number) => void;
+  modificaSquadra: (squadra: Squadra) => void;
 }
 
-export default function SquadraFilterGrid({ squadre, deleteSquadra }: Props) {
+export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSquadra }: Props) {
   // Stati per i filtri
   const [selectedCitta, setSelectedCitta] = useState<string | null>(null);
   const [yearRange, setYearRange] = useState<[number, number] | null>(null);
@@ -38,24 +39,23 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra }: Props) {
     return Array.from(set).sort();
   }, [squadre]);
 
-  // Calcoliamo l'anno minimo e massimo dinamicamente in base alle squadre presenti
+  // Calcoliamo l'anno minimo e massimo in base alle squadre presenti
   const [minYear, maxYear] = useMemo(() => {
     if (squadre.length === 0) return [1857, 2026];
     const years = squadre.map((s) => s.annoFondazione);
     return [Math.min(...years), Math.max(...years)];
   }, [squadre]);
 
-  // Intervallo effettivo da applicare allo slider
   const effectiveRange = useMemo(
     () => yearRange ?? [minYear, maxYear],
     [yearRange, minYear, maxYear]
   );
 
-  // Logica di filtraggio e ordinamento (eseguita lato client come richiesto)
+  // Logica di filtraggio e ordinamento 
   const filtered = useMemo(() => {
     let result = squadre;
 
-    // 1. Filtro per Città (Corrisponde al filtro regista del prof)
+    // 1. Filtro per Città 
     if (selectedCitta) {
       result = result.filter((s) => s.citta === selectedCitta);
     }
@@ -139,14 +139,24 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra }: Props) {
       <Grid container spacing={2}>
         {filtered.map((squadra) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={squadra.id}>
-            <Card variant="outlined" sx={{ '&:hover': { boxShadow: 3 } }}>
+            <Card variant="outlined" sx={{ position:"relative",'&:hover': { boxShadow: 3 } }}>
+			<IconButton size ="small" onClick={() => modificaSquadra(squadra)}
+			sx={{
+				position:"absolute",	
+				top:40,
+				right:8,
+                 color: "#0288d1", // Blu per la modifica
+                 '&:hover': { backgroundColor: "#e1f5fe" }
+            }}>
+				✏️
+			</IconButton>
 			<IconButton size="small" onClick={() => {if(window.confirm(`Sei sicuro di voler eliminare la squadra ${squadra.nome}?`)){
 				deleteSquadra(squadra.id);
-			}}} sx={{top: 8, right:8, color:"#ef4444"}}>
+			}}} sx={{position:"absolute",top: 8, right:8, color:"#ef4444",'&:hover': { backgroundColor: "#e1f5fe" }}}>
 				❌
 			</IconButton>
               <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>🛡️ {squadra.nome}</Typography>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>🛡{squadra.nome}</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   📍 Città: {squadra.citta}
                 </Typography>
@@ -154,7 +164,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra }: Props) {
                   📆 Fondazione: {squadra.annoFondazione}
                 </Typography>
                 
-                {/* Se la squadra ha già dei giocatori, mostriamo quanti sono in rosa */}
+                {/* Se la squadra ha già dei giocatori, mostriamo quanti */}
                 {squadra.giocatori && squadra.giocatori.length > 0 && (
                   <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     <Chip 

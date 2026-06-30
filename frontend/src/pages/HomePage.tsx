@@ -9,6 +9,7 @@ import { getSquadre, deleteSquadra } from "../services/SquadraService";
 export default function HomePage() {
   const [squadre, setSquadre] = useState<Squadra[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [squadraModifica, setSquadraModifica] = useState<Squadra | null>(null);
 
   // Carica le squadre dal backend Spring Boot
   const loadSquadre = () => {
@@ -31,8 +32,21 @@ export default function HomePage() {
   const eliminaSquadra= (id:number) =>{
 	deleteSquadra(id).then(() =>  {loadSquadre();}).catch((err) => {console.error("Errore durante l'eliminazione della squadra",err);})
   }
+  
+  const modificaSquadra =(squadra: Squadra) =>{
+	setSquadraModifica(squadra);
+	setDialogOpen(true);
+  }
+  const handleOpenCreate = () =>{
+	setSquadraModifica(null);
+	setDialogOpen(true);
+  }
+  
+  const handleCloseDialog = () =>{
+	setDialogOpen(false);
+	setSquadraModifica(null);
+  }
 
-  // Esegue la chiamata al caricamento della pagina
   useEffect(() => {
     loadSquadre();
   }, []);
@@ -44,20 +58,19 @@ export default function HomePage() {
         <Button 
           variant="contained" 
           startIcon={<AddIcon />} 
-          onClick={() => setDialogOpen(true)}
+          onClick={handleOpenCreate}
         >
           Nuova Squadra
         </Button>
       </Box>
 
-      {/* La griglia filtrabile delle squadre */}
-      <SquadraFilterGrid squadre={squadre} deleteSquadra={eliminaSquadra} />
+      <SquadraFilterGrid squadre={squadre} deleteSquadra={eliminaSquadra} modificaSquadra={modificaSquadra}/>
 
-      {/* Il Dialog di creazione che abbiamo fatto nel passaggio precedente */}
       <SquadraCreateDialog
         open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
+        onClose={handleCloseDialog}
         onCreated={loadSquadre} // Quando crea, riesegue loadSquadre agganciando i nuovi dati
+		squadraDaModificare={squadraModifica}
       />
     </Container>
   );

@@ -24,7 +24,6 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"data_ora", "torneo_id", "squadra_home_id", "squadra_away_id"}))
-// da vedere uniqeuConstraint
 public class Partita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

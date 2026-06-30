@@ -44,10 +44,10 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/register")
-	public String saveUtente(@Valid @ModelAttribute("credenziali") Credenziali credenziali,
-			@Valid @ModelAttribute("utente") Utente utente, BindingResult bindingResult, Model model) {
+	public String saveUtente(@Valid @ModelAttribute("credenziali") Credenziali credenziali, BindingResult bindingResultCredenziali,
+			@Valid @ModelAttribute("utente") Utente utente, BindingResult bindingResultUtente, Model model) {
 		
-		if(bindingResult.hasErrors()) {
+		if(bindingResultUtente.hasErrors() || bindingResultCredenziali.hasErrors()) {
 			model.addAttribute("credenziali", credenziali);
 	        model.addAttribute("utente", utente);
 			return "register";

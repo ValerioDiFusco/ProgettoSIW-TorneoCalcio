@@ -45,7 +45,6 @@
 							<span class="vs-divider">-</span>
 							<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
 						</a>
-						<span class="separator-dash">--------</span>
 						<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
 					</li>
 				</ul>
@@ -61,7 +60,6 @@
 							<span th:text="${p.goalsAway}" class="score-badge"></span>
 							<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
 						</a>	
-						<span class="separator-dash">------</span>
 						<a th:href="@{'/tornei/' +  ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
 					</li>
 				</ul>	
