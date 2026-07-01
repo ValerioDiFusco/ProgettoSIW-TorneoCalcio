@@ -41,7 +41,13 @@
 		            <a th:href="@{'/arbitri/' + ${a.id}}" th:text="${a.nome + ' ' + a.cognome}" class="item-link">Nome Arbitro</a>
 		        </li>
 		    </ul>
+			
+			<div th:if="${userDetails != null and userDetails.authorities.toString().contains('ADMIN')}" class="admin-actions">
+			    <a th:href="@{'/admin/arbitri/new'}" class="button admin-btn">➕ Aggiungi Nuovo Arbitro</a>
+			</div>
 		</div>
+		
+
 		
 		<footer>
 		    Progetto SIW - Sistema gestione tornei calcio

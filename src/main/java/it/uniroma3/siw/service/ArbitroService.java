@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.exception.ArbitroNotFoundException;
+import it.uniroma3.siw.exception.DuplicateArbitroException;
 import it.uniroma3.siw.model.Arbitro;
 import it.uniroma3.siw.repository.ArbitroRepository;
 
@@ -36,7 +37,12 @@ public class ArbitroService {
 	}
 	
 	@Transactional
-	public Arbitro save(Arbitro a) {
-		return this.arbitroRepository.save(a);
+	public Arbitro save(Arbitro a) throws DuplicateArbitroException {
+		if(this.arbitroRepository.existsByCodiceArbitroIgnoreCase(a.getCodiceArbitro())) {
+			throw new DuplicateArbitroException(a.getCodiceArbitro());
+		}
+		else {
+			return this.arbitroRepository.save(a);
+		}
 	}
 }

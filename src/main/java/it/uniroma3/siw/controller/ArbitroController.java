@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.exception.DuplicateArbitroException;
 import it.uniroma3.siw.model.Arbitro;
 import it.uniroma3.siw.service.ArbitroService;
 import it.uniroma3.siw.service.PartitaService;
@@ -50,7 +51,13 @@ public class ArbitroController {
 		if(bindingResult.hasErrors()) {
 			return "admin/arbitri/form";
 		}
-		this.arbitroService.save(arbitro);
-		return "redirect:/arbitri";
+		try {
+			this.arbitroService.save(arbitro);
+			return "redirect:/arbitri";
+		}
+		catch(DuplicateArbitroException e) {
+			bindingResult.reject("arbitro.duplicate");
+			return "admin/arbitri/form";
+		}
 	}
 }

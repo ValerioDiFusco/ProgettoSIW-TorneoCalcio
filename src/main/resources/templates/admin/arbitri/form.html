@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New Arbitro</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		
+		<div class="nav">
+		    <div class="nav-logo-section">
+		        <strong><a th:href="@{/}">⚽ Tornei Calcio</a></strong>
+		        
+				<span th:if="${userDetails == null}" style="display: inline-flex; align-items: center;">
+				            <a th:href="@{/login}" style="color: white; background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif;">Log in</a>
+				        </span>
+				        
+				        <span th:if="${userDetails != null}" style="display: inline-flex; align-items: center;margin-left: 12px;">
+				            <form th:action="@{/logout}" method="POST" style="margin: 0; padding:0; display: inline-flex;">
+				                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; cursor: pointer;">Log out</button>
+				            </form>
+				        </span>
+		    </div>
+		    
+		    <div>
+		        <a th:href="@{/tornei}">Tornei</a>
+		        <a th:href="@{/giocatori}">Giocatori</a>
+		        <a th:href="@{/squadre}">Squadre</a>
+		        <a th:href="@{/partite}">Calendario</a>
+				<a th:href="@{/arbitri}">Arbitri</a>
+		    </div>
+		</div>
+		
+		<div class="list-container view-container form-container">
+			
+			<div class="torneo-header">
+				<h1>Aggiungi Arbitro</h1>
+			</div>
+
+			<form th:method="POST" th:action="@{'/admin/arbitri'}" th:object="${arbitro}" class="custom-form">
+				
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err:${#fields.globalErrors()}" th:text="${err}" class="error-global"></p>
+				</div>
+			
+				
+				<div class="form-group">
+					<label class="form-label">CF:</label>
+					<span><input type="text" style="text-transform:uppercase" th:field="${arbitro.codiceArbitro}" class="search-input form-input" placeholder="es: ARX001"></span>
+					<span th:if="${#fields.hasErrors('codiceArbitro')}" th:errors="*{codiceArbitro}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Nome:</label>
+					<span><input type="text" th:field="${arbitro.nome}" class="search-input form-input" placeholder="es: Mario"></span>
+					<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="form-label">Cognome:</label>
+					<span><input type="text" th:field="${arbitro.cognome}" class="search-input form-input" placeholder="es: Rossi"></span>
+					<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="error-message"></span>
+				</div>
+
+				
+				<div class="form-submit-block">
+					<span><button type="submit" class="button admin-btn form-btn">Conferma</button></span>
+				</div>
+			</form>
+		</div>
+		<footer>
+		    Progetto SIW - Sistema gestione tornei calcio
+		</footer>
+	</body>
+</html>
