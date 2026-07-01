@@ -25,6 +25,7 @@
 	        <a th:href="@{/giocatori}">Giocatori</a>
 	        <a th:href="@{/squadre}">Squadre</a>
 	        <a th:href="@{/partite}">Calendario</a>
+			<a th:href="@{/arbitri}">Arbitri</a>
 	    </div>
 	</div>
 
@@ -33,28 +34,28 @@
         <p>Controlla le partite in programma e i risultati dei match già giocati</p>
     </div>
 
-    <div class="list-container view-container">
-        
-        <ul class="item-list">
-			<li th:each="p : ${partite}" class="page-match-item">
-				<a th:href="@{'/partite/' + ${p.id}}" class="match-link">
-					<span th:text="${p.squadraHome.nome}" class="team-name-inline"></span>
-					<span th:if="${p.stato.name() == 'SCHEDULED'}" class="vs-style">
-						-
-						<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
-					</span>
-					<span th:unless="${p.stato.name() == 'SCHEDULED'}" class="score-style">
-						<span th:text="${p.goalsHome + '-' + p.goalsAway}" class="score-badge-text"></span>
-						<span th:text="${p.squadraAway.nome}" class="team-name-inline"></span>
-					</span>
-					
-				</a>
-				<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date"></span>
-				<a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
-			</li>
-        </ul>
-        
-     </div>
+	<div class="list-container view-container">
+	    <ul class="item-list">
+	        <li th:each="p : ${partite}" class="item-element">
+	            <span class="icon-ball">📅</span>
+	            
+	            <a th:href="@{'/partite/' + ${p.id}}" class="item-link">
+	                <span th:text="${p.squadraHome.nome}"></span>
+	                <span th:if="${p.stato.name() == 'SCHEDULED'}">
+	                    - 
+	                    <span th:text="${p.squadraAway.nome}"></span>
+	                </span>
+	                <span th:unless="${p.stato.name() == 'SCHEDULED'}">
+	                    <span th:text="' (' + ${p.goalsHome} + '-' + ${p.goalsAway} + ') '"></span>
+	                    <span th:text="${p.squadraAway.nome}"></span>
+	                </span>
+	            </a>
+	            
+	            <span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date" style="margin-left: auto; padding-right: 15px;"></span>
+	            <a th:href="@{'/tornei/' + ${p.torneo.id}}" th:text="${p.torneo.nome}" class="tournament-link"></a>
+	        </li>
+	    </ul>
+	</div>
 	 <footer>
 	     Progetto SIW - Sistema gestione tornei calcio
 	 </footer>		

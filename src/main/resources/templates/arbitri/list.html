@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>AddSquadra</title>
+		<title>Arbitro</title>
 		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
-	
 	<body>
 		<div class="nav">
 		    <div class="nav-logo-section">
@@ -29,27 +28,21 @@
 				<a th:href="@{/arbitri}">Arbitri</a>
 		    </div>
 		</div>
-		<div class="list-container view-container form-container">
-			
-			<div class="torneo-header">
-				<h1>Aggiungi squadra al Torneo</h1>
-			</div>
-
-			<form th:method="POST" th:action="@{/admin/tornei/{id}/squadre(id=${torneo.id})}" class="custom-form">
-				
-				<div class="form-group checkbox-list-group">
-					<div th:each="s : ${squadre}" class="checkbox-item-row">
-						<input type="checkbox" name="squadreId" th:value="${s.id}" class="custom-checkbox">
-						<span th:text="${s.nome}" class="team-name-inline checkbox-label-text">Nome Squadra</span>
-					</div>
-				</div>
-
-				<div class="form-submit-block">
-					<button type="submit" class="button admin-btn form-btn">Conferma</button>
-				</div>
-				
-			</form>
+		
+		<div class="header-list">
+			<h1>Elenco degli Arbitri</h1>
+			<p>Visualizza in dettaglio ogni arbitro</p>
 		</div>
+		
+		<div class="list-container view-container">
+		    <ul class="item-list">
+		        <li th:each="a : ${arbitri}" class="item-element">
+		            <span class="icon-ball">🏁</span>
+		            <a th:href="@{'/arbitri/' + ${a.id}}" th:text="${a.nome + ' ' + a.cognome}" class="item-link">Nome Arbitro</a>
+		        </li>
+		    </ul>
+		</div>
+		
 		<footer>
 		    Progetto SIW - Sistema gestione tornei calcio
 		</footer>
