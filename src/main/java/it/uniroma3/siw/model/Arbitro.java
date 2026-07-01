@@ -30,9 +30,6 @@ public class Arbitro {
 	@Column(nullable = false, unique = true)
 	private String codiceArbitro;
 	
-	@OneToMany(mappedBy = "arbitro", cascade = {CascadeType.PERSIST})
-	private List<Partita> partite = new ArrayList<>();
-	
 	public Arbitro() {
 		
 	}
@@ -75,13 +72,6 @@ public class Arbitro {
 		this.codiceArbitro = codiceArbitro;
 	}
 
-	public List<Partita> getPartite() {
-		return partite;
-	}
-
-	public void setPartite(List<Partita> partite) {
-		this.partite = partite;
-	}
 
 	@Override
 	public int hashCode() {
