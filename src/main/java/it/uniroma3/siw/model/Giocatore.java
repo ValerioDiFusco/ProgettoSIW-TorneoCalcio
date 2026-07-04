@@ -30,7 +30,6 @@ public class Giocatore {
 	private Long id;
 	
 	@NotBlank
-	@Pattern(regexp="^.{4}$") // ^ non permette testo prima, 4 caratteri, $ non di più
 	@Column(nullable = false , unique= true)
 	private String codiceFiscale;
 	

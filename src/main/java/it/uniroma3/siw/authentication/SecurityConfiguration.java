@@ -47,7 +47,9 @@ public class SecurityConfiguration {
                       "/favicon.ico").permitAll();
 			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
 			authorize.requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credenziali.ADMIN_ROLE);
-			authorize.requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credenziali.ADMIN_ROLE);   
+			authorize.requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credenziali.ADMIN_ROLE);
+			authorize.requestMatchers(HttpMethod.GET, "/utenti/**").hasAnyAuthority(Credenziali.DEFAULT_ROLE);
+			authorize.requestMatchers(HttpMethod.POST, "/utenti/**").hasAnyAuthority(Credenziali.DEFAULT_ROLE); 
 			authorize.anyRequest().authenticated();
 			});
 

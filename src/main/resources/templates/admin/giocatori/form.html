@@ -50,7 +50,7 @@
 				
 				<div class="form-group">
 					<label class="form-label">CF:</label>
-					<span><input type="text" style="text-transform:uppercase" th:field="${giocatore.codiceFiscale}" class="search-input form-input" placeholder="es: MRAR"></span>
+					<span><input type="text" style="text-transform:uppercase" th:field="${giocatore.codiceFiscale}" class="search-input form-input" placeholder="es: RSSMRA80A01H501U"></span>
 					<span th:if="${#fields.hasErrors('codiceFiscale')}" th:errors="*{codiceFiscale}" class="error-message"></span>
 				</div>
 				
@@ -83,7 +83,7 @@
 				
 				<div class="form-group">
 					<label class="form-label">Altezza (cm):</label>
-					<span><input type="text" th:field="${giocatore.altezza}" class="search-input form-input" placeholder="es: 180"></span>
+					<span><input type="text" th:field="${giocatore.altezza}" class="search-input form-input" placeholder="es: 1.80"></span>
 					<span th:if="${#fields.hasErrors('altezza')}" th:errors="*{altezza}" class="error-message"></span>
 				</div>
 				

@@ -26,14 +26,10 @@ export default function SquadraCreateDialog({ open, onClose, onCreated, squadraD
 
   const handleSubmit = async () => {
     // Chiamata alla funzione del tuo servizio che mappa la POST /rest/squadre
-    const data = ({
-      nome,
-      annoFondazione: Number(annoFondazione),
-      citta,
-    });
+    const data = ({nome, annoFondazione: Number(annoFondazione), citta});
 	try{
 		if(squadraDaModificare){
-			await updateSquadra(squadraDaModificare.id, data);
+			await updateSquadra(squadraDaModificare.id, data); // await ->fernati qui e aspetta che il database finisca di fare l'update
 		}
 		else{
 			await createSquadra(data);
