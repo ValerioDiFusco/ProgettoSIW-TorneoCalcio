@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
@@ -17,11 +18,9 @@ import it.uniroma3.siw.repository.TorneoRepository;
 @SpringBootApplication
 public class TorneoCalcioApplication implements CommandLineRunner {
 	
-	private TorneoRepository torneoRepository;
 	private PartitaRepository partitaRepository;
 	
-	public TorneoCalcioApplication(TorneoRepository torneoRepository, PartitaRepository partitaRepository) {
-		this.torneoRepository = torneoRepository;
+	public TorneoCalcioApplication(PartitaRepository partitaRepository) {
 		this.partitaRepository = partitaRepository;
 	}
 
@@ -41,8 +40,8 @@ public class TorneoCalcioApplication implements CommandLineRunner {
 		
 		Partita partita = this.partitaRepository.findById(1L).get();
 		partita.getSquadraAway().getNome();
-			 
-		
+
+
 		
 		watch.stop();
 		System.out.println(watch.prettyPrint());

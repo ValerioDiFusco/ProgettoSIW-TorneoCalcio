@@ -40,3 +40,5 @@ INSERT INTO partita (id, data_ora, luogo, goals_home, goals_away, stato, arbitro
 INSERT INTO partita (id, data_ora, luogo, goals_home, goals_away, stato, arbitro_id, torneo_id, squadra_home_id, squadra_away_id) VALUES (nextval('partita_seq'), '2026-11-05 21:00:00', 'Gewiss Stadium', NULL, NULL, 'SCHEDULED', 1, 51, 251, 301);
 INSERT INTO partita (id, data_ora, luogo, goals_home, goals_away, stato, arbitro_id, torneo_id, squadra_home_id, squadra_away_id) VALUES (nextval('partita_seq'), '2026-09-20 15:00:00', 'Stadio Renato Dall''Ara', NULL, NULL, 'SCHEDULED', 1, 101, 351, 1);
 insert into credenziali (id, username, password, role) values(nextval('credenziali_seq'), 'paolo', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ADMIN');
+INSERT INTO utente (id, nome, cognome, email) VALUES (1, 'Valerio', 'Rossi', 'valerio.rossi@email.com');
+INSERT INTO credenziali (id, username, password, role, utente_id) VALUES (nextval('credenziali_seq'), 'valerio', '$2a$10$xDlfF/jIe7hMsTbB1zK9RelTCgEhpcZK3ApuhtAmDchHvsiQB1dsW', 'DEFAULT', 1);
