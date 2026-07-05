@@ -62,7 +62,6 @@ public class TorneoController {
 	public String listSquadre(@PathVariable("id") Long id, Model model) {
 		Torneo t = this.torneoService.findById(id);
 		model.addAttribute("listaSquadre", t.getSquadre());
-		model.addAttribute("torneo", t);
 		return "tornei/listSquadre";
 	}
 

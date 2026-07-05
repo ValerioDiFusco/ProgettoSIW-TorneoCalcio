@@ -1,5 +1,9 @@
 package it.uniroma3.siw.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,10 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.model.Credenziali;
 import it.uniroma3.siw.model.Partita;
 import it.uniroma3.siw.model.Stato;
 import it.uniroma3.siw.service.ArbitroService;
 import it.uniroma3.siw.service.CommentoService;
+import it.uniroma3.siw.service.CredenzialiService;
 import it.uniroma3.siw.service.PartitaService;
 import it.uniroma3.siw.service.SquadraService;
 import it.uniroma3.siw.service.TorneoService;
@@ -25,23 +31,33 @@ public class PartitaController {
 	private SquadraService squadraService;
 	private ArbitroService arbitroService;
 	private CommentoService commentoService;
+	private CredenzialiService credenzialiService;
 	
 
 	
 	public PartitaController(PartitaService partitaService, TorneoService torneoService, SquadraService squadraService,
-			ArbitroService arbitroService,CommentoService commentoService) {
+			ArbitroService arbitroService,CommentoService commentoService, CredenzialiService credenzialiService) {
 		this.partitaService = partitaService;
 		this.torneoService = torneoService;
 		this.squadraService = squadraService;
 		this.arbitroService = arbitroService;
 		this.commentoService = commentoService;
+		this.credenzialiService = credenzialiService;
 	}
 
 	@GetMapping("/partite/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		Partita p = this.partitaService.findById(id);
 		model.addAttribute("partita", p);
-		model.addAttribute("nCommenti", this.commentoService.countByPartitaId(id));
+		UserDetails user = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!(authentication instanceof AnonymousAuthenticationToken)) {
+			user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Credenziali credenziali = this.credenzialiService.findByUsername(user.getUsername());
+			if(credenziali.getRole().equals("DEFAULT")) {
+				model.addAttribute("nCommenti", this.commentoService.countByPartitaId(id));
+			}
+		}
 		return "partite/show";
 	}
 	

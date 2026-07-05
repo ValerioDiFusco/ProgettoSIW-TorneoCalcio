@@ -48,7 +48,7 @@ public class Partita {
 	private Stato stato;
 	
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
 	@JsonIgnore
 	private Arbitro arbitro;
