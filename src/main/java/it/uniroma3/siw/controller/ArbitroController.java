@@ -29,8 +29,7 @@ public class ArbitroController {
 	public String show(@PathVariable("id") Long id, Model model){
 		Arbitro a = this.arbitroService.findById(id);
 		model.addAttribute("arbitro",a);
-		model.addAttribute("partiteArbitrate", this.partitaService.findArbitrate(a));
-		model.addAttribute("partiteDaArbitrare", this.partitaService.findDaArbitrare(a));
+		model.addAttribute("partite", a.getPartite());
 		return "arbitri/show";
 	}
 	

@@ -30,6 +30,9 @@ public class Arbitro {
 	@Column(nullable = false, unique = true)
 	private String codiceArbitro;
 	
+	@OneToMany(mappedBy = "arbitro", cascade = {CascadeType.PERSIST})
+	public List<Partita> partite;
+	
 	public Arbitro() {
 		
 	}
@@ -71,6 +74,14 @@ public class Arbitro {
 	public void setCodiceArbitro(String codiceArbitro) {
 		this.codiceArbitro = codiceArbitro;
 	}
+	
+	public List<Partita> getPartite() {
+		return partite;
+	}
+
+	public void setPartite(List<Partita> partite) {
+		this.partite = partite;
+	}
 
 
 	@Override
@@ -89,6 +100,8 @@ public class Arbitro {
 		Arbitro other = (Arbitro) obj;
 		return Objects.equals(codiceArbitro, other.codiceArbitro);
 	}
+
+
 	
 	
 	

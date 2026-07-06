@@ -33,25 +33,6 @@ public class PartitaService {
 		}
 	}
 	
-	@Transactional(readOnly = true)
-	public List<Partita> findGiocateByTorneo(Torneo torneo){
-		return this.partitaRepository.findByTorneoAndStato(torneo, Stato.PLAYED);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Partita> findProgrammateByTorneo(Torneo torneo){
-		return this.partitaRepository.findByTorneoAndStato(torneo, Stato.SCHEDULED);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Partita> findArbitrate(Arbitro arbitro){
-		return this.partitaRepository.findByArbitroAndStato(arbitro, Stato.PLAYED);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Partita> findDaArbitrare(Arbitro arbitro){
-		return this.partitaRepository.findByArbitroAndStato(arbitro, Stato.SCHEDULED);
-	}
 	
 	@Transactional(readOnly = true)
 	public List<Partita> findAll(){

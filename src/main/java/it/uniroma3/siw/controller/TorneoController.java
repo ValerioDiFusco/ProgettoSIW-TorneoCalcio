@@ -52,8 +52,7 @@ public class TorneoController {
 		Map<Squadra, Classifica> mappaClassifica = this.torneoService.aggiornaClassifica(t);
 		model.addAttribute("numSquadre", mappaClassifica.size());
 		model.addAttribute("torneo", t);
-		model.addAttribute("partiteGiocate", this.partitaService.findGiocateByTorneo(t));
-		model.addAttribute("partiteProg", this.partitaService.findProgrammateByTorneo(t));
+		model.addAttribute("partite", t.getPartite());
 		model.addAttribute("classifica", mappaClassifica);
 		return "tornei/show";
 	}

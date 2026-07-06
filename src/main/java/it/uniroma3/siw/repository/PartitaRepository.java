@@ -12,11 +12,6 @@ import it.uniroma3.siw.model.Torneo;
 
 public interface PartitaRepository extends CrudRepository<Partita,Long>{
 	
-	public List<Partita> findByTorneoAndStato(Torneo torneo, Stato stato);
-	
-	@EntityGraph(attributePaths = {"squadraHome", "squadraAway", "torneo"})
-	public List<Partita> findByArbitroAndStato(Arbitro arbitro,Stato stato);
-	
 	@EntityGraph(attributePaths = {"torneo", "squadraHome", "squadraAway"})
 	public List<Partita> findAllByOrderByStatoAscDataOraAsc();
 }

@@ -39,7 +39,7 @@
 			<div class="partite-section">
 				<h2 class="section-title">📅 Partite Da Arbitrare</h2>
 				<ul class="item-list">
-					<li th:each="p : ${partiteDaArbitrare}" class="page-match-item">
+					<li th:each="p : ${partite}" th:if="${p.stato.name()=='SCHEDULED'}" class="page-match-item">
 						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date"></span>
 						<a th:href="@{'/partite/' + ${p.id}}" class="match-link">
 							<span th:text="${p.squadraHome.nome}" class="team-name-inline"></span>
@@ -52,7 +52,7 @@
 				
 				<h2 class="section-title">⚽ Partite Arbitrate</h2>	
 				<ul class="item-list">
-					<li th:each="p : ${partiteArbitrate}" class="page-match-item">
+					<li th:each="p : ${partite}" th:if="${p.stato.name()=='PLAYED'}" class="page-match-item">
 						<span th:text="${#temporals.format(p.dataOra, 'dd/MM')}" class="match-date done-date"></span>
 						<a th:href="@{'/partite/' + ${p.id}}" class="match-link">
 							<span th:text="${p.squadraHome.nome}" class="team-name-inline"></span>
