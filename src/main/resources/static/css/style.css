@@ -1,16 +1,12 @@
-/* ==========================================
-   1. IMPOSTAZIONI GENERALI DELLA PAGINA
-   ========================================== */
+/*IMPOSTAZIONI GENERALI DELLA PAGINA*/
 body {
     margin: 0; 
     font-family: Arial, sans-serif;
-    background: #f0f4f8; /* Sfondo grigio/azzurrino leggero per far risaltare gli elementi bianchi */
+    background: #f0f4f8; 
     color: #1a1a1a;
 }
 
-/* ==========================================
-   2. NAVBAR (BARRA DI NAVIGAZIONE)
-   ========================================== */
+/* NAVBAR  */
 .nav {
     display: flex; /* elementi sulla stessa riga*/
     justify-content: space-between;/* spinge un elemento a sinistra e uno a destra*/
@@ -20,7 +16,7 @@ body {
     color: white;
 }
 
-/* Riguarda i link dentro nav appunto nav a*/
+/* Riguarda i link dentro nav */
 .nav a {
     color: white;
     margin-left: 20px;/*distanza tra torn,gioc,squad */
@@ -32,9 +28,6 @@ body {
     text-decoration: underline; /*Aggiunge sottolineatura quando passo sopra con il mouse*/
 }
 
-/* ==========================================
-   3. HEADER (HOMEPAGE)
-   ========================================== */
 .header {
     text-align: center; /*Centra il testo*/
     padding: 50px 25px; /*50 sopra e sotto, 25 destra/sinistsra*/
@@ -52,9 +45,7 @@ body {
     font-size: 16px;
 }
 
-/* ==========================================
-   4. DASHBOARD (CONTENITORE E CARD)
-   ========================================== */
+
 /* è il contenitore delle card */
 .grid {
     display: flex; /*mette elementi in riga uno accanto all'altro*/
@@ -72,7 +63,7 @@ body {
     border-radius: 12px; /*bordi arrotondati*/
     box-shadow: 10px 20px 30px rgba(0,0,0,0.1);
     text-align: center;
-    transition: 0.3s; /*quando passo sopra rende la transizione morbida*/
+    transition: 0.3s; 
 }
 
 .card:hover {
@@ -105,9 +96,7 @@ body {
     background: #16a34a;
 }
 
-/* ==========================================
-   5. FOOTER
-   ========================================== */
+/*FOOTER*/
 footer {
     margin-top: 200px;
     text-align: center;
@@ -119,15 +108,13 @@ footer {
     border-top: 1px solid #cbd5e1;
 }
 
-/* ==========================================
-   6. PAGINA LISTA TORNEI (VERSIONE COLORATA)
-   ========================================== */
+/* PAGINA LISTA TORNEI  */
 
-/* Header colorato specifico per la pagina dei tornei */
+/* Header per la pagina dei tornei */
 .header-list {
     text-align: center;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6); /* Sfumatura blu profonda */
+    background: linear-gradient(135deg, #60a5fa, #3b82f6); 
     color: white;
     margin-bottom: 30px;
     box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.05);
@@ -142,19 +129,16 @@ footer {
 .header-list p {
     margin: 8px 0 0 0;
     font-size: 15px;
-    color: #bfdbfe; /* Testo azzurrino soft */
+    color: #bfdbfe; 
 }
 
-/* ==========================================
-   6. PAGINA LISTA TORNEI (VERSIONE COLORATA)
-   ========================================== */
+/*PAGINA LISTA TORNEI */
 
-/* ... l'header-list rimane invariato ... */
 
 /* Contenitore principale centrato e rettangolare */
 .list-container {
     max-width: 750px;
-    margin: 80px auto 80px auto; /* AUMENTATO IL PRIMO VALORE: sposta la lista più in basso rispetto alla Nav/Header */
+    margin: 80px auto 80px auto; 
     background: white;
     padding: 30px;
     border-radius: 16px;
@@ -181,13 +165,13 @@ footer {
 }
 
 .search-input:focus {
-    border-color: #2563eb; /* Diventa blu quando scrivi */
+    border-color: #2563eb; 
     background-color: #f8fafc;
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .search-button {
-    background-color: #22c55e; /* Coerente con la Nav */
+    background-color: #22c55e; 
     color: white;
     border: none;
     padding: 0 24px;
@@ -220,15 +204,15 @@ footer {
     padding: 4px 12px;
     margin-bottom: 8px;
     border-radius: 10px;
-    background: #f8fafc; /* Sfondo grigio chiarissimo di base */
+    background: #f8fafc; 
     border: 1px solid #f1f5f9;
     transition: all 0.2s ease;
 }
 
 .item-element:hover {
-    background: #eff6ff; /* Sfondo azzurro tenue al passaggio del mouse */
+    background: #eff6ff; 
     border-color: #bfdbfe;
-    transform: translateX(5px); /* Spostamento fluido verso destra */
+    transform: translateX(5px); 
 }
 
 .icon-ball {
@@ -251,7 +235,7 @@ footer {
     color: #2563eb; /* Il testo del torneo diventa blu all'hover */
 }
 
-/* Bottone Amministratore (Aggiungi Torneo) */
+/* Bottone Aggiungi Torneo */
 .admin-actions {
     text-align: center;
     border-top: 2px dashed #e2e8f0;
@@ -261,28 +245,24 @@ footer {
 
 .admin-btn {
     display: inline-block;
-    background-color: #22c55e; /* Stesso verde del bottone "Apri" delle card */
+    background-color: #22c55e; 
     color: white;
     padding: 14px 30px;
     border-radius: 12px;
     font-size: 15px;
 }
-/* ==========================================
-   7. SCHEDA DETTAGLIO TORNEO (LEGGIBILITÀ AUMENTATA)
-   ========================================== */
-
-/* Contenitore principale: isolato e pulito */
+/* SHOW TORNEO */
 .view-container {
     max-width: 850px;
     margin: 80px auto; 
-    background: #ffffff; /* Sfondo bianco puro per staccare dal body grigio */
+    background: #ffffff;
     padding: 40px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
 }
 
-/* Intestazione principale */
+
 .torneo-header {
     text-align: center;
     margin-bottom: 35px;
@@ -292,7 +272,7 @@ footer {
 
 .torneo-header h1 {
     font-size: 38px;
-    color: #0f172a; /* Nero profondo per massimo contrasto */
+    color: #0f172a; 
     margin: 0 0 12px 0;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -300,7 +280,7 @@ footer {
 
 .torneo-badge {
     display: inline-block;
-    background: #1e293b; /* Badge scuro per risaltare subito all'occhio */
+    background: #1e293b; 
     color: #ffffff;
     padding: 6px 18px;
     border-radius: 30px;
@@ -308,18 +288,18 @@ footer {
     font-size: 14px;
 }
 
-/* Card informativa superiore */
+
 .info-card {
     background: #f8fafc; 
-    border: 1px solid #cbd5e1; /* Bordo più scuro per definire i confini */
+    border: 1px solid #cbd5e1;
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 35px;
 }
 
 .info-row {
-    font-size: 16px; /* Font leggermente più grande */
-    color: #1e293b;  /* Colore testo più scuro e leggibile */
+    font-size: 16px; 
+    color: #1e293b;  
     margin-bottom: 16px;
 }
 
@@ -328,11 +308,11 @@ footer {
     font-weight: 700;
 }
 
-/* Link del contatore squadre */
+/* Link contatore squadre */
 .squadre-count-link {
     color: #2563eb;
     font-weight: 800;
-    text-decoration: underline; /* Sottolineato per far capire subito che è un link */
+    text-decoration: underline; 
     background: #eff6ff;
     padding: 4px 12px;
     border-radius: 6px;
@@ -359,18 +339,18 @@ footer {
     padding: 16px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
-    line-height: 1.7; /* Interlinea aumentata per non affaticare la lettura */
+    line-height: 1.7; 
     color: #334155;
     font-size: 15px;
 }
 
-/* Pannello Admin (Contrasto soft ma chiaro) */
+/* Pannello Admin */
 .admin-panel {
     display: flex;
     gap: 14px;
     justify-content: center;
     margin-bottom: 40px;
-    background: #f0fdf4; /* Sfondo verde chiarissimo per azioni positive */
+    background: #f0fdf4; 
     border: 1px solid #bbf7d0;
     padding: 20px;
     border-radius: 12px;
@@ -396,13 +376,13 @@ footer {
     background-color: #1d4ed8;
 }
 
-/* Titoli delle sezioni Partite e Classifica */
+
 .section-title {
     font-size: 24px;
     color: #0f172a;
     margin: 45px 0 20px 0;
     font-weight: 800;
-    border-bottom: 3px solid #2563eb; /* Riga blu spessa per dividere bene i blocchi */
+    border-bottom: 3px solid #2563eb; 
     padding-bottom: 10px;
 }
 
@@ -417,7 +397,7 @@ footer {
     display: flex;
     align-items: center;
     background: #ffffff;
-    border: 1px solid #cbd5e1; /* Margini dei blocchi partita ben definiti */
+    border: 1px solid #cbd5e1; 
     padding: 16px 20px;
     margin-bottom: 12px;
     border-radius: 10px;
@@ -428,12 +408,12 @@ footer {
 .match-item:hover {
     background: #f8fafc;
     border-color: #2563eb;
-    transform: translateY(-2px); /* Movimento verticale invece che laterale, più naturale */
+    transform: translateY(-2px);/
 }
 
 /* Data della partita */
 .match-date {
-    background: #334155; /* Sfondo scuro per la data: si legge all'istante */
+    background: #334155; 
     color: #ffffff;
     font-weight: 700;
     font-size: 13px;
@@ -443,10 +423,10 @@ footer {
 }
 
 .done-date {
-    background: #64748b; /* Data grigia per i match già conclusi */
+    background: #64748b; 
 }
 
-/* Testo e link interni alla partita */
+
 .match-link {
     flex: 1;
     display: flex;
@@ -464,7 +444,7 @@ footer {
     padding: 0 5px;
 }
 
-/* Badge dei Gol (Risultato) */
+/* Badge dei Gol */
 .score-badge {
     background: #2563eb;
     color: #ffffff;
@@ -476,9 +456,7 @@ footer {
     font-size: 15px;
 }
 
-/* ==========================================
-   TABELLA CLASSIFICA AD ALTO CONTRASTO
-   ========================================== */
+/* TABELLA CLASSIFICA */
 .custom-table {
     width: 100%;
     border-collapse: collapse;
@@ -502,18 +480,18 @@ footer {
 .custom-table td {
     padding: 16px;
     text-align: center;
-    color: #0f172a; /* Testo dei dati scuro */
+    color: #0f172a; 
     font-size: 15px;
     border-bottom: 1px solid #e2e8f0;
 }
 
-/* Righe alternate ben distinte */
+
 .custom-table tbody tr:nth-child(even) {
     background-color: #f8fafc;
 }
 
 .custom-table tbody tr:hover {
-    background-color: #eff6ff; /* Evidenzia in azzurro la riga puntata dal mouse */
+    background-color: #eff6ff; 
 }
 
 .team-name {
@@ -523,18 +501,15 @@ footer {
     font-size: 16px;
 }
 
-/* Colonna punti ultra-leggibile */
+
 .points-cell {
     font-weight: 800;
     color: #2563eb !important;
     font-size: 17px;
-    background-color: rgba(37, 99, 235, 0.05); /* Sfondo dedicato per i punti */
+    background-color: rgba(37, 99, 235, 0.05); 
 }
-/* ==========================================
-   8. SCHEDA DETTAGLIO SQUADRA E ROSA
-   ========================================== */
+/* DETTAGLIO SQUADRA */
 
-/* Pannello admin specifico adattato anche per i form interni */
 .team-admin-panel {
     flex-wrap: wrap;
     align-items: center;
@@ -545,7 +520,7 @@ footer {
     display: inline-block;
 }
 
-/* Bottone Elimina (Rosso per indicare un'azione distruttiva) */
+/* Bottone Elimina */
 .btn-delete {
     background-color: #ef4444;
     color: white;
@@ -570,18 +545,17 @@ footer {
 
 /* Lista numerata dei giocatori */
 .player-list {
-    padding-left: 25px; /* Spazio per la numerazione automatica 1, 2, 3... */
+    padding-left: 25px; 
     margin: 0 0 30px 0;
 }
 
 .player-item {
     margin-bottom: 12px;
     color: #475569;
-    font-weight: bold; /* Rende i numeri dell'elenco più visibili */
+    font-weight: bold; 
     font-size: 16px;
 }
 
-/* Box interno per il contenuto del giocatore */
 .player-info {
     display: flex;
     justify-content: space-between;
@@ -593,7 +567,7 @@ footer {
     font-weight: normal;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     transition: all 0.2s ease;
-    margin-left: 10px; /* Distanza dal numero */
+    margin-left: 10px; 
 }
 
 .player-info:hover {
@@ -615,7 +589,7 @@ footer {
     text-decoration: underline;
 }
 
-/* Badge del ruolo del giocatore (es. Portiere, Attaccante) */
+/* Badge del ruolo del giocatore*/
 .player-role {
     display: inline-block;
     background: #eff6ff;
@@ -629,11 +603,9 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-/* ==========================================
-   9. RIFINITURE PAGINA LISTA PARTITE GLOBALE
-   ========================================== */
+/* PAGINA LISTA PARTITA */
 
-/* Il contenitore <ul> principale */
+/* Il contenitore <ul> */
 .item-list {
     max-width: 850px;
     margin: 80px auto;
@@ -659,7 +631,6 @@ footer {
     border-color: #2563eb;
 }
 
-/* Link principale del blocco squadre/risultato */
 .match-link {
     display: flex;
     align-items: center;
@@ -674,14 +645,13 @@ footer {
     color: #0f172a;
 }
 
-/* Gestione degli stati in linea */
 .vs-style, .score-style {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Il badge con il punteggio (es: 2-1) */
+/* Il badge con il punteggio */
 .score-badge-text {
     background: #2563eb;
     color: #ffffff;
@@ -714,16 +684,12 @@ footer {
 .tournament-link:hover {
     text-decoration: underline;
 }
-/* ==========================================
-   11. PAGINA DETTAGLIO ARBITRO
-   ========================================== */
+/* SHOW ARBITRO */
 
-/* Nasconde i trattini statici dell'HTML per usare il layout flessibile del CSS */
 .page-match-item .separator-dash {
     display: none;
 }
 
-/* Assicura che la riga separi bene i link e mantenga l'allineamento */
 .page-match-item {
     display: flex;
     align-items: center;
@@ -734,28 +700,21 @@ footer {
     margin-bottom: 12px;
     border-radius: 10px;
 }
-/* ==========================================
-   12. PAGINA DETTAGLIO GIOCATORE
-   ========================================== */
 
-/* Allinea le etichette dei dettagli (CF, Anno, ecc.) per una lettura ordinata */
+/*SHOW GIOCATORE*/
 .info-card .info-row strong {
     display: inline-block;
     min-width: 80px; 
     color: #0f172a;
 }
 
-/* Adatta il badge del ruolo già creato per non farlo andare a capo */
 .player-role.spec-role {
     display: inline-flex;
     margin-top: 0;
     vertical-align: middle;
 }
-/* ==========================================
-   13. STILE GLOBALE PER I FORM
-   ========================================== */
 
-/* Restringe leggermente il contenitore per i form rendendolo più compatto */
+/* STILE GLOBALE PER I FORM */
 .form-container {
     max-width: 600px !important;
 }
@@ -764,14 +723,14 @@ footer {
     margin-top: 20px;
 }
 
-/* Struttura a righe per i campi */
+
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-/* Etichetta sopra il campo */
+
 .form-label {
     font-size: 15px;
     font-weight: 700;
@@ -779,20 +738,20 @@ footer {
     margin-bottom: 6px;
 }
 
-/* Modifiche agli input ereditati da .search-input per estenderli al 100% */
+
 .form-input {
     width: 100%;
     box-sizing: border-box;
     padding: 12px 16px;
 }
 
-/* Stile specifico per la select del ruolo */
+
 .form-select {
     background-color: #ffffff;
     cursor: pointer;
 }
 
-/* Centratura e spaziatura del tasto di conferma */
+
 .form-submit-block {
     text-align: center;
     margin-top: 30px;
@@ -807,7 +766,7 @@ footer {
     cursor: pointer;
 }
 
-/* Gestione degli errori di validazione */
+
 .error-message {
     display: inline-block;
     color: #ef4444;
@@ -826,12 +785,13 @@ footer {
     font-weight: 700;
     margin-bottom: 20px;
 }
-/* Stile per il testo di esempio dentro i campi del form */
+
 .form-input::placeholder {
-    color: #94a3b8; /* Un grigio chiaro elegante che sparisce appena l'utente scrive */
-    opacity: 1;     /* Forza la visibilità corretta su tutti i browser */
+    color: #94a3b8; 
+    opacity: 1;     
 }
-/* Allinea la squadra home, i gol e la squadra away sulla stessa riga */
+
+
 .row-score-inputs {
     display: flex !important;
     flex-direction: row !important;
@@ -841,7 +801,7 @@ footer {
     margin-bottom: 25px;
 }
 
-/* Allinea il testo delle squadre verso i rispettivi input */
+
 .team-home-align {
     text-align: right;
     flex: 1;
@@ -852,7 +812,6 @@ footer {
     flex: 1;
 }
 
-/* Dimensione fissa per i box dei gol */
 .score-input-wrapper {
     width: 70px;
     text-align: center;
@@ -862,13 +821,11 @@ footer {
     text-align: center;
     padding: 10px !important;
 }
-/* ==========================================
-   15. SELEZIONE SQUADRE CON CHECKBOX
-   ========================================== */
 
-/* Spaziatura del blocco contenitore */
+/* SELEZIONE SQUADRE CON CHECKBOX*/
+
 .checkbox-list-group {
-    max-height: 300px; /* Se sono molte squadre, aggiunge una barra di scorrimento */
+    max-height: 300px;
     overflow-y: auto;
     padding: 10px;
     background: #f8fafc;
@@ -876,7 +833,6 @@ footer {
     border-radius: 8px;
 }
 
-/* Riga singola per ogni squadra */
 .checkbox-item-row {
     display: flex;
     align-items: center;
@@ -889,7 +845,6 @@ footer {
     border-bottom: none;
 }
 
-/* Ingrandisce leggermente la casella di controllo per renderla più cliccabile */
 .custom-checkbox {
     width: 18px;
     height: 18px;
