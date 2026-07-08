@@ -11,21 +11,18 @@ export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [squadraModifica, setSquadraModifica] = useState<Squadra | null>(null);
 
-  // Carica le squadre dal backend Spring Boot
   const loadSquadre = () => {
     getSquadre().then((res) => {
-        // Controlliamo se res.data esiste ed è effettivamente un Array
         if (res && Array.isArray(res.data)) {
           setSquadre(res.data);
         } else {
-          // Se non è un array (es. database vuoto o formato strano), salviamo un array vuoto
           console.warn("I dati ricevuti non sono un array:", res.data);
           setSquadre([]);
         }
       })
       .catch((err) => {
         console.error("Errore nel recupero delle squadre:", err);
-        setSquadre([]); // In caso di errore di rete, evitiamo il crash passando un array vuoto
+        setSquadre([]); 
       });
   };
   
@@ -69,7 +66,7 @@ export default function HomePage() {
       <SquadraCreateDialog
         open={dialogOpen}
         onClose={handleCloseDialog}
-        onCreated={loadSquadre} // Quando crea, riesegue loadSquadre agganciando i nuovi dati
+        onCreated={loadSquadre} 
 		squadraDaModificare={squadraModifica}
       />
     </Container>

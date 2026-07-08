@@ -12,24 +12,24 @@ import type { Squadra } from "../types";
 
 interface Props {
   open: boolean;
-  onClose: () => void; //funzione per chiudere finistrea es quando premo annulla
-  onCreated: () => void; //creazione squadra con successo aggiorna la lista
+  onClose: () => void; 
+  onCreated: () => void; 
   squadraDaModificare?: Squadra | null;
 }
 
 export default function SquadraCreateDialog({ open, onClose, onCreated, squadraDaModificare }: Props) {
-  const [nome, setNome] = useState(""); //nome parte con la string vuota
-  const [annoFondazione, setAnnoFondazione] = useState<number | "">(""); //è u numero o una stringa vuota
-  const [citta, setCitta] = useState(""); //citta parte con la string vuota
+  const [nome, setNome] = useState(""); 
+  const [annoFondazione, setAnnoFondazione] = useState<number | "">(""); 
+  const [citta, setCitta] = useState(""); 
   
 
 
   const handleSubmit = async () => {
-    // Chiamata alla funzione del tuo servizio che mappa la POST /rest/squadre
+
     const data = ({nome, annoFondazione: Number(annoFondazione), citta});
 	try{
 		if(squadraDaModificare){
-			await updateSquadra(squadraDaModificare.id, data); // await ->fernati qui e aspetta che il database finisca di fare l'update
+			await updateSquadra(squadraDaModificare.id, data); 
 		}
 		else{
 			await createSquadra(data);

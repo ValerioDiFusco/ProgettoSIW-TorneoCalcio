@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import type { Squadra } from "../types";
 
-// Definiamo le opzioni di ordinamento per le squadre
+
 type SortOption = "nome-asc" | "nome-desc" | "anno-asc" | "anno-desc";
 
 interface Props {
@@ -25,12 +25,12 @@ interface Props {
 }
 
 export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSquadra }: Props) {
-  // Stati per i filtri
+
   const [selectedCitta, setSelectedCitta] = useState<string | null>(null);
   const [yearRange, setYearRange] = useState<[number, number] | null>(null);
   const [sort, setSort] = useState<SortOption>("nome-asc");
 
-  // Estraiamo le città uniche presenti nel database per creare i Chip
+  
   const cittaElenco = useMemo(() => {
     const set = new Set<string>();
     squadre.forEach((s) => {
@@ -39,7 +39,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
     return Array.from(set).sort();
   }, [squadre]);
 
-  // Calcoliamo l'anno minimo e massimo in base alle squadre presenti
+
   const [minYear, maxYear] = useMemo(() => {
     if (squadre.length === 0) return [1857, 2026];
     const years = squadre.map((s) => s.annoFondazione);
@@ -51,21 +51,21 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
     [yearRange, minYear, maxYear]
   );
 
-  // Logica di filtraggio e ordinamento 
+
   const filtered = useMemo(() => {
     let result = squadre;
 
-    // 1. Filtro per Città 
+ 
     if (selectedCitta) {
       result = result.filter((s) => s.citta === selectedCitta);
     }
 
-    // 2. Filtro per Anno di Fondazione
+
     result = result.filter(
       (s) => s.annoFondazione >= effectiveRange[0] && s.annoFondazione <= effectiveRange[1]
     );
 
-    // 3. Ordinamento dinamico
+
     result = [...result].sort((a, b) => {
       switch (sort) {
         case "nome-asc":
@@ -84,10 +84,10 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
 
   return (
     <Box>
-      {/* Sezione Filtri */}
+      
       <Box sx={{ mb: 3, display: "flex", flexDirection: "column", gap: 2 }}>
         
-        {/* Chip per filtrare le Città */}
+        
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
           <Chip
             label="Tutte le città"
@@ -104,7 +104,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
           ))}
         </Box>
 
-        {/* Slider Anno Fondazione + Select Ordinamento */}
+        
         <Box sx={{ display: "flex", gap: 4, alignItems: "center", flexWrap: "wrap" }}>
           <Box sx={{ minWidth: 200, flex: 1 }}>
             <Typography variant="body2" gutterBottom>
@@ -135,7 +135,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
         </Box>
       </Box>
 
-      {/* Griglia delle Squadre */}
+      
       <Grid container spacing={2}>
         {filtered.map((squadra) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={squadra.id}>
@@ -145,7 +145,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
 				position:"absolute",	
 				top:40,
 				right:8,
-                 color: "#0288d1", // Blu per la modifica
+                 color: "#0288d1",
                  '&:hover': { backgroundColor: "#e1f5fe" }
             }}>
 				✏️
@@ -164,7 +164,7 @@ export default function SquadraFilterGrid({ squadre, deleteSquadra, modificaSqua
                   📆 Fondazione: {squadra.annoFondazione}
                 </Typography>
                 
-                {/* Se la squadra ha già dei giocatori, mostriamo quanti */}
+                
                 {squadra.giocatori && squadra.giocatori.length > 0 && (
                   <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     <Chip 

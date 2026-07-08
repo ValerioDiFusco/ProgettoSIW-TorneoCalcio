@@ -72,10 +72,10 @@ public class TorneoController {
 		model.addAttribute("squadre", squadreDaIscrivere);
 		return "admin/tornei/addSquadra";
 	}
+
 	
-	//da rivedere
 	@PostMapping("/admin/tornei/{id}/squadre")
-	public String addSquadra(@PathVariable Long id, @RequestParam(required = false) List<Long> squadreId) { //metto la lista di Long perchè psso far sicrivere più sqadre
+	public String addSquadra(@PathVariable Long id, @RequestParam(required = false) List<Long> squadreId) { 
 		if(squadreId == null) {
 			return "redirect:/tornei/" + id;
 		}
